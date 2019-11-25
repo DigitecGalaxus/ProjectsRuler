@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.108    
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Download latest NuGet (cross-platform)
+      uses: olegtarasov/download-nuget@v1
     - name: Build with dotnet
       run: dotnet build --configuration Release
