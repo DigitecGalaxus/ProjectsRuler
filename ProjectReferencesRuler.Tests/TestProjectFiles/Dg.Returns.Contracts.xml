@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="devinite.Tools.Roslyn.Analyzers.InProcessApiGuideline" Version="4.0.4" />
+        <PackageReference Include="Dg" Version="5.1.5" />
+    </ItemGroup>
+</Project>

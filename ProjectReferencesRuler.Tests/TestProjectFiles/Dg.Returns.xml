@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <CodeAnalysisRuleSet>..\Dg.Returns.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dg.DgConsolidate\Dg.DgConsolidate.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\..\Dg.InversionOfControl\Dg.InversionOfControl.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\Dg.Returns.Contracts\Dg.Returns.Contracts.csproj" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="devinite.Tools.Roslyn.Analyzers.InProcessApiGuideline" Version="4.0.4" />
+    <PackageReference Include="Dg" Version="5.1.5" />
+    <PackageReference Include="SimpleInjector" Version="4.0.12" />
+    <PackageReference Include="Deblazer" Version="4.1.8" />
+  </ItemGroup>
+</Project>

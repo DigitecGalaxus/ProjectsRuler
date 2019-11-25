@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(MonolithRootDir)build\LibraryNoNetStandard.props" />
+  <Import Project="$(MonolithRootDir)build\LibraryNetStandard.props" />
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0,net472</TargetFrameworks>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <CodeAnalysisRuleSet>..\Dg.Returns.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="Dg.Component.Contracts.xml" PrivateAssets="All" />
+    <ProjectReference Include="Dg.Component.Contracts.xml" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dg" Version="5.1.5" />
+    <PackageReference Include="Dg" Version="5.1.5" />
+  </ItemGroup>
+</Project>

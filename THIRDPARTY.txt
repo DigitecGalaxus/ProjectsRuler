@@ -1,0 +1,2 @@
+https://github.com/moq/moq MIT License
+https://github.com/xunit/xunit Apache License, Version 2.0 http://www.apache.org/licenses/LICENSE-2.0
