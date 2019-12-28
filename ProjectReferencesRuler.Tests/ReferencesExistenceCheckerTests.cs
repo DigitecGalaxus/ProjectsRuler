@@ -38,7 +38,6 @@ namespace ProjectReferencesRuler
             var messages = checker.CheckProjectReferencesExistenceInSolution(@"..\..\..\TestSolutionFiles\README.txt", ".xml");
 
             Assert.Empty(messages);
-            Assert.Equal(0, messages.Count());
         }
 
         [Fact]

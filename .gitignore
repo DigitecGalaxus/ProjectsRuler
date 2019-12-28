@@ -9,3 +9,4 @@ MonolithRuler.Console/obj/
 ProjectsRuler.Console/bin/
 ProjectsRuler.Console/obj/
 ProjectsRuler.sln.DotSettings.user
+*.nupkg

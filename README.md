@@ -1,5 +1,5 @@
 # Introduction 
-ProjectsReferences is a set of tools for the governance in a .NET solution. It is intended to run as an unit test since it parses project and solution files locally. It undestands the .NET Core csproj format and covers the following checks:
+ReferencesRuler is a set of tools for the governance in a .NET solution. It is intended to run as an unit test since it parses project and solution files locally. It undestands the .NET Core csproj format and covers the following checks:
 1. ProjectReferences including *PrivateAssets="All"* check.
 2. PackageReferences including *PrivateAssets="All"* and *Version* check.
 3. ProjectReferences existence check: checks if a project reference is still a valid project in the solution.
@@ -12,20 +12,21 @@ The main limitation: **It relies on having the sourcecode while running the test
 
 # Getting Started
 1.	Get the nuget package ReferencesRuler
-2.	Create a unit test
+2.	Create a unit test (see *Enforcing rules*)
 3.	Enjoy your stable architecture :)
 
 # Rules
 The rules are declarative and can be used for either project or package references. There are:
-1. Forbidden - main rule
-2. Allowed - exception from the main rule
-3. ExplicitlyForbidden - override of the exception which cannot be overriden.
-rules. The rules are declared in that particular order, because each kind of rule is stronger than the previous one. The obligatory fields in each rule are *from*, *to*, *kind* and *description*. There are also two optional fields:
-* isPrivateAssetsAllSet - can be used for either project or package references.
-* version - makes sense only with package references. If set with project references the ruler can deliver unexpected results.
+1. **Forbidden** - main rule
+2. **Allowed** - exception from the main rule
+3. **ExplicitlyForbidden** - override of the exception which cannot be overriden.
+
+The rules are declared in that particular order, because each kind of rule is stronger than the previous one. The obligatory fields in each rule are *from*, *to*, *kind* and *description*. There are also two optional fields:
+* **isPrivateAssetsAllSet** - can be used for either project or package references. It checks if the attribute *PrivateAssets="All"* is set.
+* **version** - makes sense only with package references. If set with project references the ruler can deliver unexpected results.
 
 ## Rules examples
-A tipical project/package reference rule:
+A typical project/package reference rule:
 `new ReferenceRule(@"*B*", @"*A*", RuleKind.Forbidden, description: "B Projects must not reference A, they must use the new Framework Projects")`
 
 *PrivateAssets="All"* rule
@@ -35,7 +36,7 @@ Version rule - only checks for the exact version.
 `new ReferenceRule(@"*", @"SomeNugetPackage", RuleKind.Forbidden, description: "Package version 1.2.3 is forbidden.", version="1.2.3")`
 
 # Enforcing rules
-In order to enforce rules, the ReferencesRuler is used. There are two separate methods for project and for package references. It is highly modular and extensible. You can use parsers and runners that suits your use case the best. Here is the tipical .NET use case.
+In order to enforce rules, the ReferencesRuler is used. There are two separate methods for project and for package references. It is highly modular and extensible. You can use parsers and runners that suits your use case the best. Here is the typical .NET use case.
 ```
         [Test]
         public void ItIsNotAllowedToReferenceProjectAFromProjectB()
@@ -59,7 +60,7 @@ In order to enforce rules, the ReferencesRuler is used. There are two separate m
 ```
 
 # Project references exitence check
-There is a dedicated checker for that. It uses the same csproj parser as all the other tools in the ruler: CsprojReferencesExtractor.
+There is a dedicated checker for that. It uses the same csproj parser as all the other tools in the ruler: **CsprojReferencesExtractor**.
 ```
         [Test]
         public void CheckForBrokenReferences()
@@ -120,6 +121,6 @@ Remark: this is identical setup as in the ProjectsRuler static class. Do this on
 Please keep this project .NET Standard 2.0 so as many people as possible can use this tool.
 
 # Contribute
-1. Before starting it would be nice the create an issue first. That way we can discuss the feature before implementing it. 
+1. Before starting please [create an issue first](https://github.com/DigitecGalaxus/ProjectsRuler/issues). That way we can discuss the feature before implementing it. 
 2. Create a pull request. 
-3. After creating a release, the new version will be available on nuget.org.
+3. After creating a release, the new version will be available on the [nuget.org package page](https://www.nuget.org/packages/ProjectReferencesRuler/).
