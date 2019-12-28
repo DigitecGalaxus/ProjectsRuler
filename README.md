@@ -11,8 +11,8 @@ The ReferencesRuler is highly modular and extensible. You can use its components
 The main limitation: **It relies on having the sourcecode while running the tests!**
 
 # Getting Started
-1.	Get the nuget package ReferencesRuler
-2.	Create a unit test (see *Enforcing rules*)
+1.	Get the nuget package [ReferencesRuler](https://www.nuget.org/packages/ReferencesRuler/)
+2.	[Create a unit test](#Enforcing rules)
 3.	Enjoy your stable architecture :)
 
 # Rules
@@ -123,4 +123,4 @@ Please keep this project .NET Standard 2.0 so as many people as possible can use
 # Contribute
 1. Before starting please [create an issue first](https://github.com/DigitecGalaxus/ProjectsRuler/issues). That way we can discuss the feature before implementing it. 
 2. Create a pull request. 
-3. After creating a release, the new version will be available on the [nuget.org package page](https://www.nuget.org/packages/ProjectReferencesRuler/).
+3. After creating a release, the new version will be available on the [nuget.org package page](https://www.nuget.org/packages/ReferencesRuler/).
