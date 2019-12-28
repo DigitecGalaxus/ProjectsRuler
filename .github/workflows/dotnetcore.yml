@@ -17,3 +17,5 @@ jobs:
       uses: olegtarasov/download-nuget@v1
     - name: Build with dotnet
       run: dotnet build --configuration Release
+    - name: Run tests
+      run: dotnet test
