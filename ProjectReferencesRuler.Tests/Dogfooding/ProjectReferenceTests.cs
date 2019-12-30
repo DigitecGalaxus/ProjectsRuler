@@ -33,7 +33,7 @@ namespace ProjectReferencesRuler.Dogfooding
         private void AssertReferenceRules(params ReferenceRule[] rules)
         {
             var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var solutionDir = Path.Combine(dir, @"..\..\..\..\");
+            var solutionDir = Path.Combine(dir, @"../../../../");
 
             var complaints = ProjectsRuler.GetProjectReferencesComplaints(solutionDir, rules);
 

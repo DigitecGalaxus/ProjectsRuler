@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using ProjectReferencesRuler.SolutionParsing;
 using Xunit;
 
 namespace ProjectReferencesRuler
@@ -20,7 +21,7 @@ namespace ProjectReferencesRuler
         [Fact]
         public void ExtractProjectPaths_NoLineStartsWithProject_ReturnsEmptyEnumerable()
         {
-            var path = @"..\..\..\TestSolutionFiles\README.txt";
+            var path = @"../../../TestSolutionFiles/README.txt";
             var solutionParser = new SolutionParser();
 
             var projects = solutionParser.ExtractSolutionProjects(path, ".csproj");
@@ -31,7 +32,7 @@ namespace ProjectReferencesRuler
         [Fact]
         public void ExtractProjectPaths_SimpleSln_ReturnsPaths()
         {
-            var path = @"..\..\..\TestSolutionFiles\SmallSolution.txt";
+            var path = @"../../../TestSolutionFiles/SmallSolution.txt";
             var solutionParser = new SolutionParser();
 
             var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
@@ -40,9 +41,9 @@ namespace ProjectReferencesRuler
             Assert.Equal(
                 new []
                 {
-                    @"..\..\..\TestSolutionFiles\devinite.PortalSystem\devinite.PortalSystem.csproj",
-                    @"..\..\..\TestSolutionFiles\CustomerService\Dg.CustomerService.Contracts\Dg.CustomerService.Contracts.csproj",
-                    @"..\..\..\TestSolutionFiles\CustomerService\Dg.CustomerService.Monolith\Dg.CustomerService.Monolith.csproj"
+                    @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
+                    @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Contracts/Dg.CustomerService.Contracts.csproj",
+                    @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj"
                 },
                 paths);
         }
@@ -50,7 +51,7 @@ namespace ProjectReferencesRuler
         [Fact]
         public void ExtractProjectGuids_SimpleSln_ReturnsGuids()
         {
-            var path = @"..\..\..\TestSolutionFiles\SmallSolution.txt";
+            var path = @"../../../TestSolutionFiles/SmallSolution.txt";
             var solutionParser = new SolutionParser();
 
             var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectGuid).ToList();
@@ -69,7 +70,7 @@ namespace ProjectReferencesRuler
         [Fact]
         public void ExtractProjectPaths_SlnWithFolders_ReturnsOnlyProjectPaths()
         {
-            var path = @"..\..\..\TestSolutionFiles\SolutionWithFolders.txt";
+            var path = @"../../../TestSolutionFiles/SolutionWithFolders.txt";
             var solutionParser = new SolutionParser();
 
             var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
@@ -78,7 +79,7 @@ namespace ProjectReferencesRuler
             Assert.Equal(
                 new []
                 {
-                    @"..\..\..\TestSolutionFiles\devinite.PortalSystem\devinite.PortalSystem.csproj",
+                    @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
                 },
                 paths);
         }
@@ -86,7 +87,7 @@ namespace ProjectReferencesRuler
         [Fact]
         public void ExtractProjectPaths_LargeSolution_ParsesWithoutErrors()
         {
-            var path = @"..\..\..\TestSolutionFiles\LargeSolution.txt";
+            var path = @"../../../TestSolutionFiles/LargeSolution.txt";
             var solutionParser = new SolutionParser();
 
             var projects = solutionParser.ExtractSolutionProjects(path, ".csproj").ToList();

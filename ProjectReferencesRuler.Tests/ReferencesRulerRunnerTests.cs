@@ -18,7 +18,7 @@ namespace ProjectReferencesRuler
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
                 filesRunner: new ProjectFilesRunner(
-                    solutionPath: @"..\..\..\TestProjectFiles\",
+                    solutionPath: @"../../../TestProjectFiles\",
                     filesExtension: "*.xml"));
 
             var complaints = runner.GetComplaintsForProjectReferences();
@@ -42,7 +42,7 @@ namespace ProjectReferencesRuler
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
                 filesRunner: new ProjectFilesRunner(
-                    solutionPath: @"..\..\..\TestProjectFiles\",
+                    solutionPath: @"../../../TestProjectFiles\",
                     filesExtension: "*.xml"));
 
             var complaints = runner.GetComplaintsForProjectReferences();
@@ -66,7 +66,7 @@ namespace ProjectReferencesRuler
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
                 filesRunner: new ProjectFilesRunner(
-                    solutionPath: @"..\..\..\TestProjectFiles\",
+                    solutionPath: @"../../../TestProjectFiles\",
                     filesExtension: "*.xml"));
 
             var complaints = runner.GetComplaintsForProjectReferences();
@@ -82,7 +82,7 @@ namespace ProjectReferencesRuler
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
                 filesRunner: new ProjectFilesRunner(
-                    solutionPath: @"..\..\..\TestProjectFiles\",
+                    solutionPath: @"../../../TestProjectFiles\",
                     filesExtension: "*.xml"));
 
             var complaints = runner.GetComplaintsForPackageReferences();
@@ -106,7 +106,7 @@ namespace ProjectReferencesRuler
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
                 filesRunner: new ProjectFilesRunner(
-                    solutionPath: @"..\..\..\TestProjectFiles\",
+                    solutionPath: @"../../../TestProjectFiles\",
                     filesExtension: "*.xml"));
 
             var complaints = runner.GetComplaintsForPackageReferences();
@@ -130,7 +130,7 @@ namespace ProjectReferencesRuler
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
                 filesRunner: new ProjectFilesRunner(
-                    solutionPath: @"..\..\..\TestProjectFiles\",
+                    solutionPath: @"../../../TestProjectFiles\",
                     filesExtension: "*.xml"));
 
             var complaints = runner.GetComplaintsForPackageReferences();
