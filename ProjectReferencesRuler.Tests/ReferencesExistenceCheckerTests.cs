@@ -18,7 +18,7 @@ namespace ProjectReferencesRuler
             var referencesExtractor = new Mock<IReferencesExtractor>();
             var checker = new ReferencesExistenceChecker(solutionParserMock.Object, referencesExtractor.Object);
 
-            var messages = checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles\README.txt", ".xml");
+            var messages = checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles/README.txt", ".xml");
 
             Assert.Empty(messages);
         }
@@ -36,7 +36,7 @@ namespace ProjectReferencesRuler
             var referencesExtractor = new Mock<IReferencesExtractor>();
             var checker = new ReferencesExistenceChecker(solutionParserMock.Object, referencesExtractor.Object);
 
-            var messages = checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles\README.txt", ".xml");
+            var messages = checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles/README.txt", ".xml");
 
             Assert.Empty(messages);
         }
@@ -69,7 +69,7 @@ namespace ProjectReferencesRuler
             var checker = new ReferencesExistenceChecker(solutionParser, referencesExtractorMock);
 
             var messages =
-                checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles\SmallValidTestSolution.txt",
+                checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles/SmallValidTestSolution.txt",
                     ".xml");
 
             Assert.Empty(messages);
@@ -83,15 +83,15 @@ namespace ProjectReferencesRuler
             var checker = new ReferencesExistenceChecker(solutionParser, referencesExtractorMock);
 
             var messages =
-                checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles\SmallInvalidTestSolution.txt",
+                checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles/SmallInvalidTestSolution.txt",
                     ".xml");
 
             // this will not work on all machines.
 //            Assert.Equal(new[]
 //            {
-//                @"Project Dg.Returns.xml has a broken reference to C:\Development\MonolithRuler\Dg.DgConsolidate\Dg.DgConsolidate.csproj. This reference is completely missing from the solution SmallInvalidTestSolution.txt",
-//                @"Project Dg.Returns.xml has a broken reference to C:\Development\MonolithRuler\Dg.InversionOfControl\Dg.InversionOfControl.csproj. This reference is completely missing from the solution SmallInvalidTestSolution.txt",
-//                @"Project Dg.Returns.xml has a broken reference to C:\Development\MonolithRuler\ProjectReferencesRuler.Tests\Dg.Returns.Contracts\Dg.Returns.Contracts.csproj. This reference is completely missing from the solution SmallInvalidTestSolution.txt"
+//                @"Project Dg.Returns.xml has a broken reference to C:/Development/MonolithRuler/Dg.DgConsolidate/Dg.DgConsolidate.csproj. This reference is completely missing from the solution SmallInvalidTestSolution.txt",
+//                @"Project Dg.Returns.xml has a broken reference to C:/Development/MonolithRuler/Dg.InversionOfControl/Dg.InversionOfControl.csproj. This reference is completely missing from the solution SmallInvalidTestSolution.txt",
+//                @"Project Dg.Returns.xml has a broken reference to C:/Development/MonolithRuler/ProjectReferencesRuler.Tests/Dg.Returns.Contracts/Dg.Returns.Contracts.csproj. This reference is completely missing from the solution SmallInvalidTestSolution.txt"
 //            }, messages);
             Assert.Equal(3, messages.Count());
         }
@@ -103,7 +103,7 @@ namespace ProjectReferencesRuler
             var referencesExtractor = new Mock<IReferencesExtractor>();
             var checker = new ReferencesExistenceChecker(solutionParserMock.Object, referencesExtractor.Object);
 
-            Assert.Throws<ArgumentException>(() => checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles\", ".xml"));
+            Assert.Throws<ArgumentException>(() => checker.CheckProjectReferencesExistenceInSolution(@"../../../TestSolutionFiles/", ".xml"));
         }
     }
 }
