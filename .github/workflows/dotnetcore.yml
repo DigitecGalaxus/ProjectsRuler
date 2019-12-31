@@ -3,9 +3,26 @@ name: .NET Core
 on: [push]
 
 jobs:
-  build:
-
+  linux-build:
+    name: Ubuntu build
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108    
+    - name: Download latest NuGet (cross-platform)
+      uses: olegtarasov/download-nuget@v1
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: Run tests
+      run: dotnet test
+  
+  windows-build:
+    name: Windows build
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v1
