@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
-    <metadata minClientVersion="2.12">
+    <metadata minClientVersion="4.1">
         <id>ReferencesRuler</id>
         <title>Project references ruler</title>
-        <version>1.1.6</version>
+        <version>1.1.7</version>
         <authors>Boško Stupar</authors>
         <owners>bosko.stupar, DigitecGalaxus</owners>
         <license type="expression">MIT</license>
@@ -19,7 +19,7 @@
         <repository type="git" url="https://github.com/DigitecGalaxus/ProjectsRuler.git" branch="master"/>
         <tags>governance architecture dotnet dotnetcore unittest rules references</tags>
         <copyright>Copyright 2019</copyright>
-        <releaseNotes>Bringing the project to the open source community.</releaseNotes>
+        <releaseNotes>Prepared the project to build cross platform on github actions properly.</releaseNotes>
         <dependencies/>
     </metadata>
     <files>
