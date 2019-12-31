@@ -2,24 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ProjectReferencesRuler
+namespace ProjectReferencesRuler.SolutionParsing
 {
     public class SolutionParser : ISolutionParser
     {
         public IEnumerable<SolutionProject> ExtractSolutionProjects(string solutionPath, string projectFileExtension)
         {
-            var solutionDir = Path.GetDirectoryName(solutionPath);
-            foreach (var line in File.ReadLines(solutionPath))
+            var solutionDir = Path.GetDirectoryName(CleanPath(solutionPath));
+            foreach (var line in File.ReadLines(CleanPath(solutionPath)))
             {
                 if (line.StartsWith("Project"))
                 {
                     var projectPath = ParseProjectPath(line);
-                    var projectGuid = ParseProjectGuid(line);
+                    var projectGuid = CleanPath(ParseProjectGuid(line));
                     if (projectPath != null && projectPath.EndsWith(projectFileExtension, StringComparison.InvariantCultureIgnoreCase))
                     {
                         yield return new SolutionProject(
                             projectGuid: projectGuid,
-                            projectPath: Path.Combine(solutionDir, projectPath),
+                            projectPath: CleanPath(Path.Combine(solutionDir, projectPath)),
                             isFolder: projectGuid == "2150E333-8FDC-42A3-9474-1A3956D46DE8");
                     }
                 }
@@ -46,6 +46,14 @@ namespace ProjectReferencesRuler
 
             // removes the parenthesis
             return pathInParenthesis.Trim().Substring(1, pathInParenthesis.Length - 3);
+        }
+
+        /// <summary>
+        /// Replaces \ with / in order for this same code to work on both Windows and Linux.
+        /// </summary>
+        private static string CleanPath(string path)
+        {
+            return path.Replace("\\", "/");
         }
     }
 }

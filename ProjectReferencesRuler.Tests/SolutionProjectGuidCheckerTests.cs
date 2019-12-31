@@ -21,7 +21,7 @@ namespace ProjectReferencesRuler
                 .Returns(new[] {"project2"});
             var checker = new SolutionProjectGuidChecker(solutionParserMock.Object);
 
-            var messages = checker.CheckSolutionProjectGuids(@"..\..\..\TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
+            var messages = checker.CheckSolutionProjectGuids(@"../../../TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
 
             Assert.Empty(messages);
         }
@@ -41,7 +41,7 @@ namespace ProjectReferencesRuler
                 .Returns(new[] {"project2"});
             var checker = new SolutionProjectGuidChecker(solutionParserMock.Object);
 
-            var messages = checker.CheckSolutionProjectGuids(@"..\..\..\TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
+            var messages = checker.CheckSolutionProjectGuids(@"../../../TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
 
             Assert.NotEmpty(messages);
         }
@@ -61,7 +61,7 @@ namespace ProjectReferencesRuler
                 .Returns(new[] {"project2"});
             var checker = new SolutionProjectGuidChecker(solutionParserMock.Object);
 
-            var messages = checker.CheckSolutionProjectGuids(@"..\..\..\TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
+            var messages = checker.CheckSolutionProjectGuids(@"../../../TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
 
             Assert.Empty(messages);
         }
@@ -81,7 +81,7 @@ namespace ProjectReferencesRuler
                 .Returns(new[] {"project2"});
             var checker = new SolutionProjectGuidChecker(solutionParserMock.Object);
 
-            var messages = checker.CheckSolutionProjectGuids(@"..\..\..\TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
+            var messages = checker.CheckSolutionProjectGuids(@"../../../TestSolutionFiles\README.txt", "9A19103F-16F7-4668-BE54-9A1E7A4F7556", ".csproj");
 
             Assert.NotEmpty(messages);
             Assert.Contains("project2.csproj", messages);
