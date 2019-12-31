@@ -69,9 +69,17 @@ namespace ProjectReferencesRuler.ProjectParsing
         {
             var doc = ParseXml(csprojPath);
             return new Project(
-                name: Path.GetFileNameWithoutExtension(csprojPath),
-                importedProps: GetImportedProps(doc).ToList(),
+                name: CleanPath(Path.GetFileNameWithoutExtension(csprojPath)),
+                importedProps: GetImportedProps(doc).Select(CleanPath).ToList(),
                 targetFrameworks: GetTargetFrameworks(doc).ToList());
+        }
+
+        /// <summary>
+        /// Replaces \ with / in order for this same code to work on both Windows and Linux.
+        /// </summary>
+        private static string CleanPath(string path)
+        {
+            return path.Replace("\\", "/");
         }
 
         private IEnumerable<string> GetTargetFrameworks(XDocument doc)

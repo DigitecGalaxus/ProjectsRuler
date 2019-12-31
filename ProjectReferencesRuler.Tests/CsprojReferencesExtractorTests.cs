@@ -11,7 +11,7 @@ namespace ProjectReferencesRuler
         {
             var extractor = new CsprojReferencesExtractor();
 
-            var references = extractor.GetProjectReferences(@"..\..\..\TestProjectFiles\Empty.xml");
+            var references = extractor.GetProjectReferences(@"../../../TestProjectFiles/Empty.xml");
 
             Assert.Empty(references);
         }
@@ -21,7 +21,7 @@ namespace ProjectReferencesRuler
         {
             var extractor = new CsprojReferencesExtractor();
 
-            var references = extractor.GetProjectReferences(@"..\..\..\TestProjectFiles\Dg.Returns.Contracts.xml");
+            var references = extractor.GetProjectReferences(@"../../../TestProjectFiles/Dg.Returns.Contracts.xml");
 
             Assert.Empty(references);
         }
@@ -32,7 +32,7 @@ namespace ProjectReferencesRuler
             var extractor = new CsprojReferencesExtractor();
 
             var references = extractor
-                .GetProjectReferences(@"..\..\..\TestProjectFiles\ReferenceWithoutPath.xml")
+                .GetProjectReferences(@"../../../TestProjectFiles/ReferenceWithoutPath.xml")
                 .ToList();
 
             Assert.Empty(references);
@@ -44,7 +44,7 @@ namespace ProjectReferencesRuler
             var extractor = new CsprojReferencesExtractor();
 
             var references = extractor
-                .GetProjectReferences(@"..\..\..\TestProjectFiles\Dg.Returns.xml")
+                .GetProjectReferences(@"../../../TestProjectFiles/Dg.Returns.xml")
                 .ToList();
 
             Assert.NotEmpty(references);
@@ -58,7 +58,7 @@ namespace ProjectReferencesRuler
         {
             var extractor = new CsprojReferencesExtractor();
 
-            var references = extractor.GetPackageReferences(@"..\..\..\TestProjectFiles\Empty.xml");
+            var references = extractor.GetPackageReferences(@"../../../TestProjectFiles/Empty.xml");
 
             Assert.Empty(references);
         }
@@ -68,7 +68,7 @@ namespace ProjectReferencesRuler
         {
             var extractor = new CsprojReferencesExtractor();
 
-            var references = extractor.GetPackageReferences(@"..\..\..\TestProjectFiles\Dg.Returns.Contracts.xml").Select(r => r.To).ToList();
+            var references = extractor.GetPackageReferences(@"../../../TestProjectFiles/Dg.Returns.Contracts.xml").Select(r => r.To).ToList();
 
             Assert.NotEmpty(references);
             Assert.Equal(2, references.Count);
@@ -82,7 +82,7 @@ namespace ProjectReferencesRuler
             var extractor = new CsprojReferencesExtractor();
 
             var references = extractor
-                .GetPackageReferences(@"..\..\..\TestProjectFiles\ReferenceWithoutPath.xml")
+                .GetPackageReferences(@"../../../TestProjectFiles/ReferenceWithoutPath.xml")
                 .ToList();
 
             Assert.Empty(references);
@@ -94,7 +94,7 @@ namespace ProjectReferencesRuler
             var extractor = new CsprojReferencesExtractor();
 
             var references = extractor
-                .GetPackageReferences(@"..\..\..\TestProjectFiles\Dg.Returns.xml")
+                .GetPackageReferences(@"../../../TestProjectFiles/Dg.Returns.xml")
                 .Select(r => r.To)
                 .ToList();
 
@@ -117,21 +117,21 @@ namespace ProjectReferencesRuler
         {
             var extractor = new CsprojReferencesExtractor();
 
-            var projectProperties = extractor.GetProjectProperties(@"..\..\..\TestProjectFiles\" + projectFileName);
+            var projectProperties = extractor.GetProjectProperties(@"../../../TestProjectFiles/" + projectFileName);
 
             Assert.Equal(expectedTargetFrameworks, projectProperties.TargetFrameworks);
         }
 
         [Theory]
         [InlineData("Dg.Component.Contracts.xml")]
-        [InlineData("Dg.Component.xml", @"$(MonolithRootDir)build\LibraryNoNetStandard.props")]
-        [InlineData("Duplicates.xml", @"$(MonolithRootDir)build\LibraryNoNetStandard.props", @"$(MonolithRootDir)build\LibraryNetStandard.props")]
+        [InlineData("Dg.Component.xml", @"$(MonolithRootDir)build/LibraryNoNetStandard.props")]
+        [InlineData("Duplicates.xml", @"$(MonolithRootDir)build/LibraryNoNetStandard.props", @"$(MonolithRootDir)build/LibraryNetStandard.props")]
         [InlineData("Empty.xml")]
         public void GetImportedProps_WithExampleFile_ReturnsImportedPropsFromFile(string projectFileName, params string[] expectedImportedProps)
         {
             var extractor = new CsprojReferencesExtractor();
 
-            var projectProperties = extractor.GetProjectProperties(@"..\..\..\TestProjectFiles\" + projectFileName);
+            var projectProperties = extractor.GetProjectProperties(@"../../../TestProjectFiles/" + projectFileName);
 
             Assert.Equal(expectedImportedProps, projectProperties.ImportedProps.ToList());
         }
