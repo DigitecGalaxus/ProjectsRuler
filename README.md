@@ -1,3 +1,5 @@
+![](https://github.com/DigitecGalaxus/ProjectsRuler/workflows/.NET%20Core/badge.svg)
+
 # Introduction 
 ReferencesRuler is a set of tools for the governance in a .NET solution. It is intended to run as an unit test since it parses project and solution files locally. It undestands the .NET Core csproj format and covers the following checks:
 1. ProjectReferences including *PrivateAssets="All"* check.
