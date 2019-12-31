@@ -36,3 +36,20 @@ jobs:
       run: dotnet build --configuration Release
     - name: Run tests
       run: dotnet test
+  
+  macos-build:
+    name: Mac OS build
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108    
+    - name: Download latest NuGet (cross-platform)
+      uses: olegtarasov/download-nuget@v1
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: Run tests
+      run: dotnet test
