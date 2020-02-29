@@ -18,5 +18,15 @@ namespace ProjectReferencesRuler.Rules.References
             IsPrivateAssetsAllSet = isPrivateAssetsAllSet;
             Version = version;
         }
+
+        public static LiteralReferenceRuleBuilder Create(string description)
+        {
+            return new LiteralReferenceRuleBuilder(description);
+        }
+
+        public static FluentReferenceRuleBuilder For(string patternFrom)
+        {
+            return new FluentReferenceRuleBuilder(patternFrom);
+        }
     }
 }
