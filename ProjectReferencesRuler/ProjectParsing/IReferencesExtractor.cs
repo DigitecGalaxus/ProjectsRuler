@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using ProjectReferencesRuler.Rules;
 using ProjectReferencesRuler.Rules.Project;
 using ProjectReferencesRuler.Rules.References;
 

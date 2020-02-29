@@ -4,16 +4,16 @@ namespace ProjectReferencesRuler.Rules.References
 {
     public class FluentReferenceRuleBuilder
     {
-        private readonly string PatternFrom;
-        private string PatternTo;
-        private RuleKind? RuleKind;
-        private string Description;
-        private bool? IsPrivateAssetsAllSet;
-        private string ReferenceVersion;
+        private readonly string _patternFrom;
+        private string _patternTo;
+        private RuleKind? _kind;
+        private string _description;
+        private bool? _isPrivateAssetsAllSet;
+        private string _version;
 
         internal FluentReferenceRuleBuilder(string patternFrom)
         {
-            PatternFrom = patternFrom;
+            _patternFrom = patternFrom;
         }
 
         public FluentReferenceRuleBuilder Referencing(
@@ -21,37 +21,37 @@ namespace ProjectReferencesRuler.Rules.References
             string version = null,
             bool? withPrivateAssetsAll = null)
         {
-            PatternTo = patternTo;
-            ReferenceVersion = version;
-            IsPrivateAssetsAllSet = withPrivateAssetsAll;
+            _patternTo = patternTo;
+            _version = version;
+            _isPrivateAssetsAllSet = withPrivateAssetsAll;
             return this;
         }
 
         public FluentReferenceRuleBuilder Is(RuleKind kind)
         {
-            RuleKind = kind;
+            _kind = kind;
             return this;
         }
 
-        public FluentReferenceRuleBuilder IsAllowed() => Is(Rules.RuleKind.Allowed);
-        public FluentReferenceRuleBuilder IsForbidden() => Is(Rules.RuleKind.Forbidden);
-        public FluentReferenceRuleBuilder IsExplicitlyForbidden() => Is(Rules.RuleKind.ExplicitlyForbidden);
+        public FluentReferenceRuleBuilder IsAllowed() => Is(RuleKind.Allowed);
+        public FluentReferenceRuleBuilder IsForbidden() => Is(RuleKind.Forbidden);
+        public FluentReferenceRuleBuilder IsExplicitlyForbidden() => Is(RuleKind.ExplicitlyForbidden);
 
         public FluentReferenceRuleBuilder Called(string description)
         {
-            Description = description;
+            _description = description;
             return this;
         }
 
         public ReferenceRule BuildRule()
         {
             return new ReferenceRule(
-                patternFrom: PatternFrom,
-                patternTo: PatternTo,
-                kind: RuleKind ?? throw new InvalidOperationException($"Please specify a {nameof(ReferenceRule.Kind)} using the method {nameof(Is)}"),
-                description: Description,
-                isPrivateAssetsAllSet: IsPrivateAssetsAllSet,
-                version: ReferenceVersion);
+                patternFrom: _patternFrom,
+                patternTo: _patternTo,
+                kind: _kind ?? throw new InvalidOperationException($"Please specify a {nameof(ReferenceRule.Kind)} using the method {nameof(Is)}"),
+                description: _description,
+                isPrivateAssetsAllSet: _isPrivateAssetsAllSet,
+                version: _version);
         }
     }
 }

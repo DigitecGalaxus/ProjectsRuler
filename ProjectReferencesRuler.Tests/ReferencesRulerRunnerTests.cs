@@ -1,7 +1,6 @@
 using Moq;
 using ProjectReferencesRuler.ProjectParsing;
 using ProjectReferencesRuler.ProjectRunners;
-using ProjectReferencesRuler.Rules;
 using ProjectReferencesRuler.Rules.References;
 using Xunit;
 

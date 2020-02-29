@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using ProjectReferencesRuler.Rules;
 using ProjectReferencesRuler.Rules.Project;
 using ProjectReferencesRuler.Rules.References;
 
