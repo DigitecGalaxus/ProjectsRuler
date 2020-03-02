@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using ProjectReferencesRuler.ProjectParsing;
 using ProjectReferencesRuler.ProjectRunners;
-using ProjectReferencesRuler.Rules;
 using ProjectReferencesRuler.Rules.References;
 
 namespace ProjectReferencesRuler

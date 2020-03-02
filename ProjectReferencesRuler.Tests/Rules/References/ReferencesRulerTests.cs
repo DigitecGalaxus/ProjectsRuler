@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
-using ProjectReferencesRuler.Rules;
-using ProjectReferencesRuler.Rules.References;
 using Xunit;
 
-namespace ProjectReferencesRuler
+namespace ProjectReferencesRuler.Rules.References
 {
     public class ReferencesRulerTests
     {

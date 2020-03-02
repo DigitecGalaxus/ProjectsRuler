@@ -1,7 +1,5 @@
 using System.IO;
 using System.Reflection;
-using ProjectReferencesRuler.ProjectParsing;
-using ProjectReferencesRuler.ProjectRunners;
 using ProjectReferencesRuler.Rules;
 using ProjectReferencesRuler.Rules.References;
 using Xunit;
@@ -46,6 +44,18 @@ namespace ProjectReferencesRuler.Dogfooding
                 // allowed exceptions
                 new ReferenceRule(@"ProjectReferencesRuler.Tests", @"xunit.runner.visualstudio", RuleKind.Allowed, description: "The sole purpose of this rule is to test the rule. It doesn't make much sense.", version: "2.4.0")
             );
+        }
+
+        [Fact]
+        public void ReferenceRulesCanBeCreatedFluentlyToo()
+        {
+            var rule = ReferenceRule.For("*")
+                .Referencing("Chabis.*")
+                .IsForbidden()
+                .Because("Nothing should reference Chabis")
+                .BuildRule();
+
+            AssertReferenceRules(rule);
         }
 
         private void AssertReferenceRules(params ReferenceRule[] rules)
