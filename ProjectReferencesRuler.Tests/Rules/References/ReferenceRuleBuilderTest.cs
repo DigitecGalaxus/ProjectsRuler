@@ -3,14 +3,14 @@ using Xunit;
 
 namespace ProjectReferencesRuler.Rules.References
 {
-    public class FluentReferenceRuleBuilderTest
+    public class ReferenceRuleBuilderTest
     {
         [Fact]
         public void BuildRule_KindNotSet_ThrowsInvalidOperationException()
         {
             var ruleBuilder = ReferenceRule.For("ProjectA")
                 .Referencing("ProjectB")
-                .Called("A cool rule I made");
+                .Because("A cool rule I made");
 
             Assert.Throws<InvalidOperationException>(() => ruleBuilder.BuildRule());
         }
@@ -20,8 +20,8 @@ namespace ProjectReferencesRuler.Rules.References
         {
             var ruleBuilder = ReferenceRule.For("ProjectA")
                 .Referencing("ProjectB", version: "12.0.0", withPrivateAssetsAll: true)
-                .Is(RuleKind.Forbidden)
-                .Called("A cool rule I made");
+                .IsForbidden()
+                .Because("A cool rule I made");
 
             var rule = ruleBuilder.BuildRule();
 
@@ -39,7 +39,7 @@ namespace ProjectReferencesRuler.Rules.References
             var ruleBuilder = ReferenceRule.For("ProjectA")
                 .Referencing("ProjectB", version: "12.0.0", withPrivateAssetsAll: true)
                 .IsAllowed()
-                .Called("A cool rule I made");
+                .Because("A cool rule I made");
 
             var rule = ruleBuilder.BuildRule();
 
@@ -52,7 +52,7 @@ namespace ProjectReferencesRuler.Rules.References
             var ruleBuilder = ReferenceRule.For("ProjectA")
                 .Referencing("ProjectB", version: "12.0.0", withPrivateAssetsAll: true)
                 .IsForbidden()
-                .Called("A cool rule I made");
+                .Because("A cool rule I made");
 
             var rule = ruleBuilder.BuildRule();
 
@@ -65,7 +65,7 @@ namespace ProjectReferencesRuler.Rules.References
             var ruleBuilder = ReferenceRule.For("ProjectA")
                 .Referencing("ProjectB", version: "12.0.0", withPrivateAssetsAll: true)
                 .IsExplicitlyForbidden()
-                .Called("A cool rule I made");
+                .Because("A cool rule I made");
 
             var rule = ruleBuilder.BuildRule();
 
@@ -77,8 +77,8 @@ namespace ProjectReferencesRuler.Rules.References
         {
             var ruleBuilder = ReferenceRule.For("ProjectA")
                 .Referencing("ProjectB")
-                .Is(RuleKind.Forbidden)
-                .Called("A cool rule I made");
+                .IsForbidden()
+                .Because("A cool rule I made");
 
             var rule = ruleBuilder.BuildRule();
 

@@ -46,6 +46,18 @@ namespace ProjectReferencesRuler.Dogfooding
             );
         }
 
+        [Fact]
+        public void ReferenceRulesCanBeCreatedFluentlyToo()
+        {
+            var rule = ReferenceRule.For("*")
+                .Referencing("Chabis.*")
+                .IsForbidden()
+                .Because("Nothing should reference Chabis")
+                .BuildRule();
+
+            AssertReferenceRules(rule);
+        }
+
         private void AssertReferenceRules(params ReferenceRule[] rules)
         {
             var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

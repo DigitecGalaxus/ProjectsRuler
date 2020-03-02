@@ -20,7 +20,7 @@ The main limitation: **It relies on having the sourcecode while running the test
 # Getting Started
 
 1. Get the nuget package [ReferencesRuler](https://www.nuget.org/packages/ReferencesRuler/)
-2. [Create a unit test](#Enforcing_rules)
+2. [Create a unit test](#Enforcing-rules)
 3. Enjoy your stable architecture :)
 
 # Rules
@@ -45,34 +45,46 @@ The rules are declared in that particular order, because each kind of rule is st
 * Version rule - only checks for the exact version:
   `new ReferenceRule(@"*", @"SomeNugetPackage", RuleKind.Forbidden, description: "Package version 1.2.3 is forbidden.", version="1.2.3")`
 
+## Fluent builder
+
+Rules can also be creating using the fluent builder API:
+
+```C#
+var rule = ReferenceRule.For("Project.A")
+    .Referencing("Project.B")
+    .IsForbidden()
+    .Because("A should not reference B")
+    .BuildRule();
+```
+
 # Enforcing rules <a name="enforcing_rules"></a>
 
 In order to enforce rules, the ReferencesRuler is used. There are two separate methods for project and for package references. It is highly modular and extensible. You can use parsers and runners that suits your use case the best. Here is the typical .NET use case.
 
 ```C#
-        [Test]
-        public void ItIsNotAllowedToReferenceProjectAFromProjectB()
-        {
-            AssertReferenceRules(
-                // The rules
-                new ReferenceRule(
-                    patternFrom: @"*B*",
-                    patternTo: @"*A*",
-                    RuleKind.Forbidden,
-                    description: "B Projects must not reference A, they must use the new Framework Projects")
-            );
-        }
+[Test]
+public void ItIsNotAllowedToReferenceProjectAFromProjectB()
+{
+    AssertReferenceRules(
+        // The rules
+        new ReferenceRule(
+            patternFrom: @"*B*",
+            patternTo: @"*A*",
+            RuleKind.Forbidden,
+            description: "B Projects must not reference A, they must use the new Framework Projects")
+    );
+}
 
-        private void AssertReferenceRules(params ReferenceRule[] rules)
-        {
-            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var solutionDir = Path.Combine(dir, @"..\..\..\");
+private void AssertReferenceRules(params ReferenceRule[] rules)
+{
+    var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+    var solutionDir = Path.Combine(dir, @"..\..\..\");
 
-            var complaints = ProjectsRuler.GetProjectReferencesComplaints(solutionDir, rules);
-            // or var complaints = ProjectsRuler.GetPackageReferencesComplaints(solutionDir, rules);;
+    var complaints = ProjectsRuler.GetProjectReferencesComplaints(solutionDir, rules);
+    // or var complaints = ProjectsRuler.GetPackageReferencesComplaints(solutionDir, rules);
 
-            Assert.IsEmpty(complaints);
-        }
+    Assert.IsEmpty(complaints);
+}
 ```
 
 # Project references exitence check
@@ -130,19 +142,19 @@ public void CheckIfSolutionHasAllValidProjectGuids()
 In case of a scenario that some of the ruler components would need to be replaced, it can be easily injected and the whole setup can be done like this:
 
 ```C#
-    var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-    var solutionDir = Path.Combine(dir, @"..\..\..\");
+var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+var solutionDir = Path.Combine(dir, @"..\..\..\");
 
-    var runner = new ReferencesRulerRunner(
-        extractor: new CsprojReferencesExtractor(),
-        referencesRuler: new ReferencesRuler(
-            patternParser: new WildcardPatternParser(),
-            rules: rules),
-        filesRunner: new ProjectFilesRunner(
-            solutionPath: solutionDir,
-            filesExtension: "*.csproj"));
+var runner = new ReferencesRulerRunner(
+    extractor: new CsprojReferencesExtractor(),
+    referencesRuler: new ReferencesRuler(
+        patternParser: new WildcardPatternParser(),
+        rules: rules),
+    filesRunner: new ProjectFilesRunner(
+        solutionPath: solutionDir,
+        filesExtension: "*.csproj"));
 
-    var complaints = runner.GetPackageReferencesComplaints();
+var complaints = runner.GetPackageReferencesComplaints();
 ```
 
 Remark: this is identical setup as in the ProjectsRuler static class. Do this only if your setup is different in any way. E.g. you want to use the Regex instead of the Wildcard patterns for the rules. ¯\\_(ツ)_/¯

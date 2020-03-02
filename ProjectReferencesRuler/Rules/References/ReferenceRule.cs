@@ -19,14 +19,9 @@ namespace ProjectReferencesRuler.Rules.References
             Version = version;
         }
 
-        public static LiteralReferenceRuleBuilder Create(string description)
+        public static ReferenceRuleBuilder For(string patternFrom)
         {
-            return new LiteralReferenceRuleBuilder(description);
-        }
-
-        public static FluentReferenceRuleBuilder For(string patternFrom)
-        {
-            return new FluentReferenceRuleBuilder(patternFrom);
+            return new ReferenceRuleBuilder(patternFrom);
         }
     }
 }
