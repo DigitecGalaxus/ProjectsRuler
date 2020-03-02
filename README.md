@@ -1,6 +1,7 @@
 # ProjectsRuler
 
-![Pipeline badge](https://github.com/DigitecGalaxus/ProjectsRuler/workflows/.NET%20Core/badge.svg) ![Nuget badge](https://img.shields.io/nuget/v/ReferencesRuler)
+![Pipeline](https://github.com/DigitecGalaxus/ProjectsRuler/workflows/.NET%20Core/badge.svg)
+![Nuget](https://img.shields.io/nuget/v/ReferencesRuler)
 
 # Introduction
 
