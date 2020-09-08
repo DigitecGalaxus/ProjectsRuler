@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <package>
-    <metadata minClientVersion="4.1">
+    <metadata minClientVersion="4.3">
         <id>ReferencesRuler</id>
         <title>Project references ruler</title>
-        <version>1.1.7</version>
+        <version>1.1.8</version>
         <authors>Boško Stupar</authors>
         <owners>bosko.stupar, DigitecGalaxus</owners>
         <license type="expression">MIT</license>
         <projectUrl>https://github.com/DigitecGalaxus/ProjectsRuler</projectUrl>
-        <iconUrl>https://static.digitecgalaxus.ch/Files/2/7/1/4/4/1/3/6/DigGax_logo_email.png</iconUrl>
-        <!--icon>images\logo.png</icon-->
+        <icon>images\logo.png</icon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>Governance library for writing unit tests to check for forbidden .csproj references.</summary>
         <description>Governance library for writing unit tests to check for forbidden .csproj references.
@@ -17,14 +16,14 @@
         It relies on having the source code around when running unit tests.</description>
         <language>en-US</language>
         <repository type="git" url="https://github.com/DigitecGalaxus/ProjectsRuler.git" branch="master"/>
-        <tags>governance architecture dotnet dotnetcore unittest rules references</tags>
-        <copyright>Copyright 2019</copyright>
-        <releaseNotes>Prepared the project to build cross platform on github actions properly.</releaseNotes>
+        <tags>governance architecture dotnet dotnetcore unittest rules references digitec galaxus digitecgalaxus</tags>
+        <copyright>Copyright 2019-2020</copyright>
+        <releaseNotes>Use newer (correct) logo</releaseNotes>
         <dependencies/>
     </metadata>
     <files>
         <file src="ProjectReferencesRuler\bin\Release\netstandard2.0\*.dll" target="lib/netstandard2.0" />
         <file src="README.md" target="" />
-        <file src="logo.png" target="images"/>
+        <file src="logo.png" target="images\logo.png"/>
     </files>
 </package>
