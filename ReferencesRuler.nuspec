@@ -17,9 +17,11 @@
         <language>en-US</language>
         <repository type="git" url="https://github.com/DigitecGalaxus/ProjectsRuler.git" branch="master"/>
         <tags>governance architecture dotnet dotnetcore unittest rules references digitec galaxus digitecgalaxus</tags>
-        <copyright>Copyright 2019-2020</copyright>
+        <copyright>2019-2020 Digitec Galaxus AG</copyright>
         <releaseNotes>Use newer (correct) logo</releaseNotes>
-        <dependencies/>
+        <dependencies>
+            <group targetFramework=".netstandard2.0" />
+        </dependencies>
     </metadata>
     <files>
         <file src="ProjectReferencesRuler\bin\Release\netstandard2.0\*.dll" target="lib/netstandard2.0" />
