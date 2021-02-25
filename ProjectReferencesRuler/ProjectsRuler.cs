@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using ProjectReferencesRuler.ProjectParsing;
 using ProjectReferencesRuler.ProjectRunners;
 using ProjectReferencesRuler.Rules.References;
@@ -9,16 +10,33 @@ namespace ProjectReferencesRuler
     {
         public static string GetProjectReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
         {
-            return GetRunner(solutionDir, rules).GetComplaintsForProjectReferences();
+            return GetProjectReferencesComplaints(solutionDir, null, rules);
+        }
+
+        public static string GetProjectReferencesComplaints(
+            string solutionDir,
+            Regex excludedProjects = null,
+            params ReferenceRule[] rules)
+        {
+            return GetRunner(solutionDir, excludedProjects, rules).GetComplaintsForProjectReferences();
         }
 
         public static string GetPackageReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
         {
-            return GetRunner(solutionDir, rules).GetComplaintsForPackageReferences();
+            return GetPackageReferencesComplaints(solutionDir, null, rules);
+        }
+
+        public static string GetPackageReferencesComplaints(
+            string solutionDir,
+            Regex excludedProjects = null,
+            params ReferenceRule[] rules)
+        {
+            return GetRunner(solutionDir, excludedProjects, rules).GetComplaintsForPackageReferences();
         }
 
         private static ReferencesRulerRunner GetRunner(
             string solutionDir,
+            Regex excludedProjects,
             IReadOnlyList<ReferenceRule> rules)
         {
             return new ReferencesRulerRunner(
@@ -28,7 +46,8 @@ namespace ProjectReferencesRuler
                     rules: rules),
                 filesRunner: new ProjectFilesRunner(
                     solutionPath: solutionDir,
-                    filesExtension: "*.csproj"));
+                    filesExtension: "*.csproj",
+                    excludedProjects));
         }
     }
 }
