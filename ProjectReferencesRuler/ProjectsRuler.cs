@@ -15,7 +15,7 @@ namespace ProjectReferencesRuler
 
         public static string GetProjectReferencesComplaints(
             string solutionDir,
-            Regex excludedProjects = null,
+            string excludedProjects = null,
             params ReferenceRule[] rules)
         {
             return GetRunner(solutionDir, excludedProjects, rules).GetComplaintsForProjectReferences();
@@ -28,7 +28,7 @@ namespace ProjectReferencesRuler
 
         public static string GetPackageReferencesComplaints(
             string solutionDir,
-            Regex excludedProjects = null,
+            string excludedProjects = null,
             params ReferenceRule[] rules)
         {
             return GetRunner(solutionDir, excludedProjects, rules).GetComplaintsForPackageReferences();
@@ -36,7 +36,7 @@ namespace ProjectReferencesRuler
 
         private static ReferencesRulerRunner GetRunner(
             string solutionDir,
-            Regex excludedProjects,
+            string excludedProjectsRegex,
             IReadOnlyList<ReferenceRule> rules)
         {
             return new ReferencesRulerRunner(
@@ -47,7 +47,7 @@ namespace ProjectReferencesRuler
                 filesRunner: new ProjectFilesRunner(
                     solutionPath: solutionDir,
                     filesExtension: "*.csproj",
-                    excludedProjects));
+                    excludedProjectsRegex));
         }
     }
 }
