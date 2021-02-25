@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using ProjectReferencesRuler.ProjectParsing;
 using ProjectReferencesRuler.ProjectRunners;
 using ProjectReferencesRuler.Rules.References;
