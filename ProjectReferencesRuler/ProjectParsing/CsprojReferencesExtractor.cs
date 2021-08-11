@@ -29,7 +29,7 @@ namespace ProjectReferencesRuler.ProjectParsing
                 .Where(tuple => !string.IsNullOrEmpty(tuple.Item1))
                 .Select(tuple => new Reference(
                     from: from,
-                    to: Path.GetFileNameWithoutExtension(tuple.Item1),
+                    to: Path.GetFileNameWithoutExtension(CleanPath(tuple.Item1)),
                     isPrivateAssetsAllSet: tuple.Item2 == "All",
                     versionOrNull: null));
         }
