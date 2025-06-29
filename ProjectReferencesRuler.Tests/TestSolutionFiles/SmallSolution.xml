@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CustomerService/Dg.CustomerService.Contracts/Dg.CustomerService.Contracts.csproj" />
+  <Project Path="CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj" />
+  <Project Path="devinite.PortalSystem/devinite.PortalSystem.csproj" />
+</Solution>

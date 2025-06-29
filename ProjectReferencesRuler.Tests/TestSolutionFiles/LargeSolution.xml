@@ -1,0 +1,226 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Applications/">
+    <Project Path="Applications/Dg.MessageHandlers.WindowsService/Dg.MessageHandlers.WindowsService.csproj" />
+  </Folder>
+  <Folder Name="/CategoryManagement/">
+    <Project Path="CategoryManagement/Dg.CategoryManagement.Erp/Dg.CategoryManagement.Erp.csproj">
+      <Build Solution="Release|x86" Project="false" />
+    </Project>
+    <Project Path="CategoryManagement/Dg.CategoryManagement.InversionOfControl/Dg.CategoryManagement.InversionOfControl.csproj" />
+    <Project Path="CategoryManagement/Dg.CategoryManagement.SystemTasks/Dg.CategoryManagement.SystemTasks.csproj" />
+    <Project Path="CategoryManagement/Dg.CategoryManagement.TestsWithDb/Dg.CategoryManagement.TestsWithDb.csproj" />
+    <Project Path="CategoryManagement/Dg.CategoryManagement.TestsWithoutDb/Dg.CategoryManagement.TestsWithoutDb.csproj" />
+    <Project Path="CategoryManagement/Dg.ProductCatalog.Contracts/Dg.ProductCatalog.Contracts.csproj" />
+    <Project Path="CategoryManagement/Dg.ProductCatalog/Dg.ProductCatalog.csproj" />
+  </Folder>
+  <Folder Name="/CategoryManagement/Dg.ProductForecast/">
+    <File Path="Monolith.Contracts/Dg.OnlineShop/Dg.ShopProductCatalog.ruleset" />
+    <Project Path="CategoryManagement/Dg.ProductForecast/Dg.ProductForecast.Contracts/Dg.ProductForecast.Contracts.csproj" />
+    <Project Path="CategoryManagement/Dg.ProductForecast/Dg.ProductForecast.DataAccess/Dg.ProductForecast.DataAccess.csproj" />
+    <Project Path="CategoryManagement/Dg.ProductForecast/Dg.ProductForecast.InversionOfControl/Dg.ProductForecast.InversionOfControl.csproj" />
+    <Project Path="CategoryManagement/Dg.ProductForecast/Dg.ProductForecast.TestsWithoutDb/Dg.ProductForecast.TestsWithoutDb.csproj" />
+    <Project Path="CategoryManagement/Dg.ProductForecast/Dg.ProductForecast.TestWithDb/Dg.ProductForecast.TestWithDb.csproj" />
+    <Project Path="CategoryManagement/Dg.ProductForecast/Dg.ProductForecast/Dg.ProductForecast.csproj" />
+  </Folder>
+  <Folder Name="/CategoryManagement/Dg.PurchaseProposal/">
+    <Project Path="CategoryManagement/Dg.PurchaseProposal/Dg.PurchaseProposal.Contracts/Dg.PurchaseProposal.Contracts.csproj" />
+    <Project Path="CategoryManagement/Dg.PurchaseProposal/Dg.PurchaseProposal.DataAccess/Dg.PurchaseProposal.DataAccess.csproj" />
+    <Project Path="CategoryManagement/Dg.PurchaseProposal/Dg.PurchaseProposal.InversionOfControl/Dg.PurchaseProposal.InversionOfControl.csproj" />
+    <Project Path="CategoryManagement/Dg.PurchaseProposal/Dg.PurchaseProposal.TestsWithDb/Dg.PurchaseProposal.TestsWithDb.csproj" />
+    <Project Path="CategoryManagement/Dg.PurchaseProposal/Dg.PurchaseProposal.TestsWithoutDb/Dg.PurchaseProposal.TestsWithoutDb.csproj" />
+    <Project Path="CategoryManagement/Dg.PurchaseProposal/Dg.PurchaseProposal/Dg.PurchaseProposal.csproj" />
+  </Folder>
+  <Folder Name="/CategoryManagement/Dg.Sales/">
+    <Project Path="CategoryManagement/Dg.Sales/Dg.Sales.Contracts/Dg.Sales.Contracts.csproj" />
+    <Project Path="CategoryManagement/Dg.Sales/Dg.Sales.InversionOfControl/Dg.Sales.InversionOfControl.csproj" />
+    <Project Path="CategoryManagement/Dg.Sales/Dg.Sales/Dg.Sales.csproj" />
+  </Folder>
+  <Folder Name="/CategoryManagement/Monolith/">
+    <Project Path="CategoryManagement/Monolith/Dg.CategoryManagement.Monolith.Contracts/Dg.CategoryManagement.Monolith.Contracts.csproj" />
+    <Project Path="CategoryManagement/Monolith/Dg.CategoryManagement.Monolith/Dg.CategoryManagement.Monolith.csproj" />
+  </Folder>
+  <Folder Name="/Chabis/">
+    <Project Path="Chabis.DbCache.InversionOfControl.SimpleInjector/Chabis.DbCache.InversionOfControl.SimpleInjector.csproj" />
+    <Project Path="Chabis.DbCache.TestsWithoutDb/Chabis.DbCache.TestsWithoutDb.csproj" />
+    <Project Path="Chabis.DbCache/Chabis.DbCache.csproj" />
+    <Project Path="Chabis.Mail/Chabis.Mail.csproj" />
+  </Folder>
+  <Folder Name="/CustomerService/">
+    <Project Path="CustomerService/Dg.CustomerService.Contracts/Dg.CustomerService.Contracts.csproj" />
+    <Project Path="CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj" />
+    <Project Path="CustomerService/Dg.CustomerService/Dg.CustomerService.csproj" />
+  </Folder>
+  <Folder Name="/Dg.DgConsolidate/">
+    <Project Path="Dg.DgConsolidate/Dg.DgConsolidate.csproj" />
+    <Project Path="Dg.DgConsolidateNet461/Dg.DgConsolidateNet461.csproj" />
+    <Project Path="Dg.InversionOfControl/Dg.InversionOfControl.csproj" />
+  </Folder>
+  <Folder Name="/Erp/">
+    <Project Path="devinite.PortalSystem.Erp/devinite.PortalSystem.Erp.csproj" />
+  </Folder>
+  <Folder Name="/FeatureToggle/">
+    <Project Path="Dg.FeatureToggle.DataAccess/Dg.FeatureToggle.DataAccess.csproj" />
+    <Project Path="Dg.FeatureToggle/Dg.FeatureToggle.csproj" />
+  </Folder>
+  <Folder Name="/Finance/">
+    <Project Path="Finance/Dg.Finance.Erp/Dg.Finance.Erp.csproj" />
+    <Project Path="Finance/Dg.Finance.TestsWithDb/Dg.Finance.TestsWithDb.csproj" />
+    <Project Path="Finance/Dg.Finance.TestsWithoutDb/Dg.Finance.TestsWithoutDb.csproj" />
+  </Folder>
+  <Folder Name="/Finance/Dg.PaymentServices/">
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices.Contracts/Dg.PaymentServices.Contracts.csproj" />
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices.DataAccess/Dg.PaymentServices.DataAccess.csproj" />
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices.InversionOfControl/Dg.PaymentServices.InversionOfControl.csproj" />
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices.MaterializedView.Contracts/Dg.PaymentServices.MaterializedView.Contracts.csproj" />
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices.MaterializedView/Dg.PaymentServices.MaterializedView.csproj" />
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices.TestsWithDb/Dg.PaymentServices.TestsWithDb.csproj" />
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices.TestsWithoutDb/Dg.PaymentServices.TestsWithoutDb.csproj" />
+    <Project Path="Finance/Dg.PaymentServices/Dg.PaymentServices/Dg.PaymentServices.csproj" />
+  </Folder>
+  <Folder Name="/Finance/Monolith/">
+    <Project Path="Finance/Monolith/Dg.Finance.Monolith.Contracts/Dg.Finance.Monolith.Contracts.csproj" />
+    <Project Path="Finance/Monolith/Dg.Finance.Monolith/Dg.Finance.Monolith.csproj" />
+  </Folder>
+  <Folder Name="/Framework/">
+    <Project Path="Framework/Dg.Erp.Framework/Dg.Erp.Framework.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/">
+    <File Path="Logistics/Dg.Logistics.ruleset" />
+    <Project Path="Logistics/Dg.Logistics.Erp/Dg.Logistics.Erp.csproj" />
+    <Project Path="Logistics/Dg.Logistics.InversionOfControl/Dg.Logistics.InversionOfControl.csproj" />
+    <Project Path="Logistics/Dg.Logistics.MessageHandlers/Dg.Logistics.MessageHandlers.csproj" />
+    <Project Path="Logistics/Dg.Logistics.Mli/Dg.Logistics.Mli.csproj" />
+    <Project Path="Logistics/Dg.Logistics.Monolith.DataExchange/Dg.Logistics.Monolith.DataExchange.csproj" />
+    <Project Path="Logistics/Dg.Logistics.Purgatory.Erp/Dg.Logistics.Purgatory.Erp.csproj" />
+    <Project Path="Logistics/Dg.Logistics.SystemTasks/Dg.Logistics.SystemTasks.csproj" />
+    <Project Path="Logistics/Dg.Logistics.TestsWithDb/Dg.Logistics.TestsWithDb.csproj" />
+    <Project Path="Logistics/Dg.Logistics.TestsWithoutDb/Dg.Logistics.TestsWithoutDb.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/ArticleRouting/">
+    <Project Path="Logistics/ArticleRouting/Dg.ArticleRouting.Contracts/Dg.ArticleRouting.Contracts.csproj" />
+    <Project Path="Logistics/ArticleRouting/Dg.ArticleRouting/Dg.ArticleRouting.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/IncomingParcelRouting/">
+    <Project Path="Logistics/IncomingParcelRouting/Dg.IncomingParcelRouting.Contracts/Dg.IncomingParcelRouting.Contracts.csproj" />
+    <Project Path="Logistics/IncomingParcelRouting/Dg.IncomingParcelRouting/Dg.IncomingParcelRouting.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/LogisticsProductCatalog/">
+    <Project Path="Logistics/LogisticsProductCatalog/Dg.LogisticsProductCatalog.Contracts/Dg.LogisticsProductCatalog.Contracts.csproj" />
+    <Project Path="Logistics/LogisticsProductCatalog/Dg.LogisticsProductCatalog/Dg.LogisticsProductCatalog.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/Monolith/">
+    <Project Path="Logistics/Monolith/Dg.Logistics.Monolith.Contracts/Dg.Logistics.Monolith.Contracts.csproj" />
+    <Project Path="Logistics/Monolith/Dg.Logistics.Monolith/Dg.Logistics.Monolith.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/ParcelShipping/">
+    <Project Path="Logistics/ParcelShipping/Dg.ParcelShipping.Contracts/Dg.ParcelShipping.Contracts.csproj" />
+    <Project Path="Logistics/ParcelShipping/Dg.ParcelShipping.DataAccess/Dg.ParcelShipping.DataAccess.csproj" />
+    <Project Path="Logistics/ParcelShipping/Dg.ParcelShipping.DhlStreetCodeSearch.ConsoleApplication/Dg.ParcelShipping.DhlStreetCodeSearch.ConsoleApplication.csproj" />
+    <Project Path="Logistics/ParcelShipping/Dg.ParcelShipping.DhlStreetCodeSearch/Dg.ParcelShipping.DhlStreetCodeSearch.csproj" />
+    <Project Path="Logistics/ParcelShipping/Dg.ParcelShipping.InversionOfControl/Dg.ParcelShipping.InversionOfControl.csproj" />
+    <Project Path="Logistics/ParcelShipping/Dg.ParcelShipping.MaterializedView/Dg.ParcelShipping.MaterializedView.csproj" />
+    <Project Path="Logistics/ParcelShipping/Dg.ParcelShipping/Dg.ParcelShipping.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/Returns/">
+    <Project Path="Logistics/Returns/Dg.Returns.Contracts/Dg.Returns.Contracts.csproj" />
+    <Project Path="Logistics/Returns/Dg.Returns/Dg.Returns.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/StorageArea/">
+    <Project Path="Logistics/StorageArea/Dg.StorageArea.Contracts/Dg.StorageArea.Contracts.csproj" />
+    <Project Path="Logistics/StorageArea/Dg.StorageArea/Dg.StorageArea.csproj" />
+  </Folder>
+  <Folder Name="/Logistics/Wms/">
+    <Project Path="Logistics/Wms/Dg.Wms.Api/Dg.Wms.Api.csproj" />
+    <Project Path="Logistics/Wms/Dg.Wms.DataAccess.Erp2Wms/Dg.Wms.DataAccess.Erp2Wms.csproj" />
+    <Project Path="Logistics/Wms/Dg.Wms.DataAccess.Wms2Erp/Dg.Wms.DataAccess.Wms2Erp.csproj" />
+    <Project Path="Logistics/Wms/Dg.Wms.DataAccess/Dg.Wms.DataAccess.csproj" />
+    <Project Path="Logistics/Wms/Dg.Wms.Erp/Dg.Wms.Erp.csproj" />
+    <Project Path="Logistics/Wms/Dg.Wms.InterfaceService/Dg.Wms.InterfaceService.csproj" />
+    <Project Path="Logistics/Wms/Dg.Wms.PollingService/Dg.Wms.PollingService.csproj" />
+    <Project Path="Logistics/Wms/Dg.Wms/Dg.Wms.csproj" />
+  </Folder>
+  <Folder Name="/Meta/">
+    <Project Path="devinite.Meta.Db/devinite.Meta.Db.csproj" />
+  </Folder>
+  <Folder Name="/MobileLogistics/">
+    <Project Path="devinite.PortalSystem.MobileLogistics/devinite.PortalSystem.MobileLogistics.csproj" />
+  </Folder>
+  <Folder Name="/Monolith.Contracts/">
+    <Project Path="Monolith.Contracts/Dg.Monolith.Contracts.TestsWithoutDb/Dg.Monolith.Contracts.TestsWithoutDb.csproj" />
+  </Folder>
+  <Folder Name="/Monolith.Contracts/Dg.HumanResources/">
+    <File Path="CategoryManagement/Dg.ProductCatalog.ruleset" />
+    <Project Path="Monolith.Contracts/Dg.HumanResources/Dg.HumanResources.Contracts/Dg.HumanResources.Contracts.csproj" />
+    <Project Path="Monolith.Contracts/Dg.HumanResources/Dg.HumanResources/Dg.HumanResources.csproj" />
+  </Folder>
+  <Folder Name="/Monolith.Contracts/Dg.OnlineShop/">
+    <Project Path="Dg.OnlineShop.InversionOfControl/Dg.OnlineShop.InversionOfControl.csproj" />
+    <Project Path="Monolith.Contracts/Dg.OnlineShop/Dg.ShopProductCatalog.Contracts/Dg.ShopProductCatalog.Contracts.csproj" />
+    <Project Path="Monolith.Contracts/Dg.OnlineShop/Dg.ShopProductCatalog/Dg.ShopProductCatalog.csproj" />
+  </Folder>
+  <Folder Name="/Newsletter/">
+    <Project Path="Dg.Newsletter.Contracts/Dg.Newsletter.Contracts.csproj" />
+    <Project Path="Dg.Newsletter.DataAccess/Dg.Newsletter.DataAccess.csproj" />
+    <Project Path="Dg.Newsletter.InversionOfControl/Dg.Newsletter.InversionOfControl.csproj" />
+    <Project Path="Dg.Newsletter/Dg.Newsletter.csproj" />
+  </Folder>
+  <Folder Name="/Personalization/">
+    <Project Path="Dg.Personalization.Test/Dg.Personalization.Test.csproj" />
+    <Project Path="Dg.Personalization/Dg.Personalization.csproj" />
+  </Folder>
+  <Folder Name="/Rma/">
+    <Project Path="Rma/Dg.Rma.Contracts/Dg.Rma.Contracts.csproj" />
+    <Project Path="Rma/Dg.Rma.Erp/Dg.Rma.Erp.csproj" />
+    <Project Path="Rma/Dg.Rma.InversionOfControl/Dg.Rma.InversionOfControl.csproj" />
+    <Project Path="Rma/Dg.Rma.Monolith/Dg.Rma.Monolith.csproj" />
+    <Project Path="Rma/Dg.Rma.TestsWithDb/Dg.Rma.TestsWithDb.csproj" />
+    <Project Path="Rma/Dg.Rma.TestsWithoutDb/Dg.Rma.TestsWithoutDb.csproj" />
+    <Project Path="Rma/Dg.Rma/Dg.Rma.csproj" />
+  </Folder>
+  <Folder Name="/Shop/">
+    <Project Path="devinite.PortalSystem.Shop/devinite.PortalSystem.Shop.csproj" />
+    <Project Path="Dg.OnlineShop.Website/Dg.OnlineShop.Website.csproj" />
+  </Folder>
+  <Folder Name="/System/">
+    <Project Path="System/Dg.System.Erp/Dg.System.Erp.csproj" />
+    <Project Path="System/Monolith/Dg.System.Monolith.Contracts/Dg.System.Monolith.Contracts.csproj" />
+    <Project Path="System/Monolith/Dg.System.Monolith/Dg.System.Monolith.csproj" />
+  </Folder>
+  <Folder Name="/SystemTasks/">
+    <Project Path="devinite.SystemTasks.Core/devinite.SystemTasks.Core.csproj" />
+    <Project Path="devinite.SystemTasks/devinite.SystemTasks.csproj" />
+    <Project Path="devinite.SystemTasksManager/devinite.SystemTasksManager.csproj" />
+    <Project Path="devinite.SystemTasksService/devinite.SystemTasksService.csproj" />
+  </Folder>
+  <Project Path="devinite.ClassLibrary.Core/devinite.ClassLibrary.Core.csproj" />
+  <Project Path="devinite.ClassLibrary/devinite.ClassLibrary.csproj" />
+  <Project Path="devinite.ConsoleApplicationForDebugging/devinite.ConsoleApplicationForDebugging.csproj">
+    <BuildDependency Project="devinite.PortalSystem.Shop/devinite.PortalSystem.Shop.csproj" />
+  </Project>
+  <Project Path="devinite.DataExchange/devinite.DataExchange.csproj" />
+  <Project Path="devinite.Db/devinite.Db.csproj" />
+  <Project Path="devinite.PortalSystem.ClassLibrary/devinite.PortalSystem.ClassLibrary.csproj" />
+  <Project Path="devinite.PortalSystem.Cmi/devinite.PortalSystem.Cmi.csproj" />
+  <Project Path="devinite.PortalSystem.Retail/devinite.PortalSystem.Retail.csproj" />
+  <Project Path="devinite.PortalSystem.Test/devinite.PortalSystem.Test.csproj" />
+  <Project Path="devinite.PortalSystem/devinite.PortalSystem.csproj" />
+  <Project Path="devinite.PrinterService/devinite.PrinterService.csproj" />
+  <Project Path="devinite.QualityMonitoring/devinite.QualityMonitoring.csproj" />
+  <Project Path="devinite.Testing.Common/devinite.Testing.Common.csproj" />
+  <Project Path="devinite.Testing.Integration/devinite.Testing.Integration.csproj" />
+  <Project Path="devinite.Testing.Unit/devinite.Testing.Unit.csproj" />
+  <Project Path="Dg.Application.Abstractions/Dg.Application.Abstractions.csproj" />
+  <Project Path="Dg.DbCache.DataAccess/Dg.DbCache.DataAccess.csproj" />
+  <Project Path="Dg.DbCache/Dg.DbCache.csproj" />
+  <Project Path="Dg.OnlineShop.TestsWithDb/Dg.OnlineShop.TestsWithDb.csproj" />
+  <Project Path="Dg.OnlineShop.TestsWithoutDb/Dg.OnlineShop.TestsWithoutDb.csproj" />
+  <Project Path="Dg.ShopProductBoxRepository/Dg.ShopProductBoxRepository.csproj" />
+  <Project Path="Dg.TestsWithDb/Dg.TestsWithDb.csproj" />
+  <Project Path="Dg.TestsWithoutDb/Dg.TestsWithoutDb.csproj" />
+  <Project Path="Dg.Web.Abstractions/Dg.Web.Abstractions.csproj" />
+</Solution>

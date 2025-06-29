@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using ProjectReferencesRuler.SolutionParsing;
@@ -10,12 +11,21 @@ namespace ProjectReferencesRuler
         [Fact]
         public void ExtractProjectPaths_PathInvalid_ThrowsException()
         {
-            var path = "this does not work";
+            var path = "this does not work.sln";
             var solutionParser = new SolutionParser();
 
             var projects = solutionParser.ExtractSolutionProjects(path, ".csproj");
 
             Assert.Throws<FileNotFoundException>(() => projects.ToList());
+        }
+
+        [Fact]
+        public void ExtractProjectPaths_UnknownSolutionType_ThrowsException()
+        {
+            var path = "this does not work.png";
+            var solutionParser = new SolutionParser();
+
+            Assert.Throws<NotSupportedException>(() => solutionParser.ExtractSolutionProjects(path, ".csproj"));
         }
 
         [Fact]
@@ -44,6 +54,25 @@ namespace ProjectReferencesRuler
                     @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
                     @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Contracts/Dg.CustomerService.Contracts.csproj",
                     @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj"
+                },
+                paths);
+        }
+
+        [Fact]
+        public void ExtractProjectPaths_SimpleSlnx_ReturnsPaths()
+        {
+            var path = @"../../../TestSolutionFiles/SmallSolution.xml";
+            var solutionParser = new SolutionParser();
+
+            var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
+
+            Assert.NotEmpty(paths);
+            Assert.Equal(
+                new []
+                {
+                    @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Contracts/Dg.CustomerService.Contracts.csproj",
+                    @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj",
+                    @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj"
                 },
                 paths);
         }
@@ -85,9 +114,38 @@ namespace ProjectReferencesRuler
         }
 
         [Fact]
+        public void ExtractProjectPaths_SlnxWithFolders_ReturnsOnlyProjectPaths()
+        {
+            var path = @"../../../TestSolutionFiles/SolutionWithFolders.xml";
+            var solutionParser = new SolutionParser();
+
+            var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
+
+            Assert.NotEmpty(paths);
+            Assert.Equal(
+                new []
+                {
+                    @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
+                },
+                paths);
+        }
+
+        [Fact]
         public void ExtractProjectPaths_LargeSolution_ParsesWithoutErrors()
         {
             var path = @"../../../TestSolutionFiles/LargeSolution.txt";
+            var solutionParser = new SolutionParser();
+
+            var projects = solutionParser.ExtractSolutionProjects(path, ".csproj").ToList();
+
+            Assert.NotEmpty(projects);
+            Assert.Equal(142, projects.Count);
+        }
+
+        [Fact]
+        public void ExtractProjectPaths_LargeSolutionSlnx_ParsesWithoutErrors()
+        {
+            var path = @"../../../TestSolutionFiles/LargeSolution.xml";
             var solutionParser = new SolutionParser();
 
             var projects = solutionParser.ExtractSolutionProjects(path, ".csproj").ToList();

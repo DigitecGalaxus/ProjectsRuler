@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../TestProjectFiles/Dg.Component.Contracts.xml" Type="C#" />
+  <Project Path="../TestProjectFiles/Dg.Returns.xml" Type="C#" />
+</Solution>
