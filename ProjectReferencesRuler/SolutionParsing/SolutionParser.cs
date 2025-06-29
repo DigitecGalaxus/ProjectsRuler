@@ -8,7 +8,8 @@ namespace ProjectReferencesRuler.SolutionParsing
     {
         public IEnumerable<SolutionProject> ExtractSolutionProjects(string solutionPath, string projectFileExtension)
         {
-            var solutionDir = Path.GetDirectoryName(CleanPath(solutionPath));
+            bool atLeastOneReferenceFound = false;
+            var solutionDir = Path.GetDirectoryName(CleanPath(solutionPath))!;
             foreach (var line in File.ReadLines(CleanPath(solutionPath)))
             {
                 if (line.StartsWith("Project"))
@@ -17,12 +18,18 @@ namespace ProjectReferencesRuler.SolutionParsing
                     var projectGuid = CleanPath(ParseProjectGuid(line));
                     if (projectPath != null && projectPath.EndsWith(projectFileExtension, StringComparison.InvariantCultureIgnoreCase))
                     {
+                        atLeastOneReferenceFound = true;
                         yield return new SolutionProject(
                             projectGuid: projectGuid,
                             projectPath: CleanPath(Path.Combine(solutionDir, projectPath)),
                             isFolder: projectGuid == "2150E333-8FDC-42A3-9474-1A3956D46DE8");
                     }
                 }
+            }
+
+            if (!atLeastOneReferenceFound)
+            {
+                throw new InvalidOperationException($"No project references were found in the solution {solutionPath}.");
             }
         }
 

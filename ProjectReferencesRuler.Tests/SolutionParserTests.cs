@@ -19,14 +19,14 @@ namespace ProjectReferencesRuler
         }
 
         [Fact]
-        public void ExtractProjectPaths_NoLineStartsWithProject_ReturnsEmptyEnumerable()
+        public void ExtractProjectPaths_NoLineStartsWithProject_ThrowsException()
         {
             var path = @"../../../TestSolutionFiles/README.txt";
             var solutionParser = new SolutionParser();
 
             var projects = solutionParser.ExtractSolutionProjects(path, ".csproj");
 
-            Assert.Empty(projects);
+            Assert.Throws<InvalidOperationException>(() => projects.ToList());
         }
 
         [Fact]
