@@ -54,7 +54,8 @@ namespace ProjectReferencesRuler.ProjectParsing
             return projectReferenceItemGroup
                 .ElementsIgnoreNamespace(ProjectReference)
                 .Select(GetIncludeContent)
-                .Where(r => !string.IsNullOrEmpty(r));
+                .Where(r => !string.IsNullOrEmpty(r))
+                .Select(CleanPath);
         }
 
         private static XDocument ParseXml(string csprojPath)
