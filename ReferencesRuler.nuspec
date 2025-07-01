@@ -3,7 +3,7 @@
     <metadata minClientVersion="4.3">
         <id>ReferencesRuler</id>
         <title>Project references ruler</title>
-        <version>1.1.8</version>
+        <version>1.2.0</version>
         <authors>Boško Stupar</authors>
         <owners>bosko.stupar, DigitecGalaxus</owners>
         <license type="expression">MIT</license>
