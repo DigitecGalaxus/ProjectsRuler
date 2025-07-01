@@ -19,7 +19,7 @@ namespace ProjectReferencesRuler.Dogfooding
                 new SolutionParser(),
                 new CsprojReferencesExtractor());
 
-            var messages = checker.CheckProjectReferencesExistenceInSolution(fullWithoutExternal, "*.csproj").ToList();
+            var messages = checker.CheckProjectReferencesExistenceInSolution(fullWithoutExternal, ".csproj").ToList();
 
             //, $"Check for broken references failed. See messages:\n{string.Join("\n", messages)}"
             Assert.Empty(messages);

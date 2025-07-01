@@ -1,0 +1,8 @@
+# Default owner for all files of the repository
+* @DigitecGalaxus/team-q
+
+# Add specific owners for filetypes or directories following this examples:
+# *.cs for all .cs files
+# /src/ for all subdirectories and files in it
+# /src/* only the files in the specific directory, excluding subdirectories
+# **/logs for all "logs" directories in the repository

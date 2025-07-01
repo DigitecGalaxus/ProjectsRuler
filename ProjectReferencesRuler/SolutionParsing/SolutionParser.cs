@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Xml;
 
 namespace ProjectReferencesRuler.SolutionParsing
 {
@@ -8,7 +10,19 @@ namespace ProjectReferencesRuler.SolutionParsing
     {
         public IEnumerable<SolutionProject> ExtractSolutionProjects(string solutionPath, string projectFileExtension)
         {
-            var solutionDir = Path.GetDirectoryName(CleanPath(solutionPath));
+            return Path.GetExtension(solutionPath).ToLowerInvariant() switch
+            {
+                // .xml and .txt are used for tests
+                ".slnx" or ".xml" => ExtractNewSolutionProjects(solutionPath, projectFileExtension),
+                ".sln" or ".txt" => ExtractClassicSolutionProjects(solutionPath, projectFileExtension),
+                _ => throw new NotSupportedException($"Solution type not supported: {solutionPath}")
+            };
+        }
+
+        private IEnumerable<SolutionProject> ExtractClassicSolutionProjects(string solutionPath, string projectFileExtension)
+        {
+            bool atLeastOneReferenceFound = false;
+            var solutionDir = Path.GetDirectoryName(CleanPath(solutionPath))!;
             foreach (var line in File.ReadLines(CleanPath(solutionPath)))
             {
                 if (line.StartsWith("Project"))
@@ -17,6 +31,7 @@ namespace ProjectReferencesRuler.SolutionParsing
                     var projectGuid = CleanPath(ParseProjectGuid(line));
                     if (projectPath != null && projectPath.EndsWith(projectFileExtension, StringComparison.InvariantCultureIgnoreCase))
                     {
+                        atLeastOneReferenceFound = true;
                         yield return new SolutionProject(
                             projectGuid: projectGuid,
                             projectPath: CleanPath(Path.Combine(solutionDir, projectPath)),
@@ -24,6 +39,32 @@ namespace ProjectReferencesRuler.SolutionParsing
                     }
                 }
             }
+
+            if (!atLeastOneReferenceFound)
+            {
+                throw new InvalidOperationException($"No project references were found in the solution {solutionPath}.");
+            }
+        }
+
+        private IEnumerable<SolutionProject> ExtractNewSolutionProjects(string solutionPath, string projectFileExtension)
+        {
+            var solutionDir = Path.GetDirectoryName(CleanPath(solutionPath))!;
+            var doc = new XmlDocument();
+            doc.Load(solutionPath);
+
+            var projects = doc.GetElementsByTagName("Project")
+                .OfType<XmlNode>()
+                .Select(e => e.Attributes?["Path"].Value)
+                .Where(p => !string.IsNullOrEmpty(p) && p.EndsWith(projectFileExtension, StringComparison.InvariantCultureIgnoreCase))
+                .Select(p => new SolutionProject("", CleanPath(Path.Combine(solutionDir, p)), false))
+                .ToList();
+
+            if (!projects.Any())
+            {
+                throw new InvalidOperationException($"No project references were found in the solution {solutionPath}.");
+            }
+
+            return projects;
         }
 
         private string ParseProjectGuid(string line)
