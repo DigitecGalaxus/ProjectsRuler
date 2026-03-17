@@ -87,6 +87,39 @@ private void AssertReferenceRules(params ReferenceRule[] rules)
 }
 ```
 
+## Reporting unused rules
+
+By default, the ruler only reports complaints when a rule is violated. You can opt-in to also report rules that were never matched by any reference. This is useful to detect stale or overly specific rules in your ruleset.
+
+```C#
+[Test]
+public void CheckForUnusedRules()
+{
+    var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+    var solutionDir = Path.Combine(dir, @"..\..\..\");
+
+    var complaints = ProjectsRuler.GetProjectReferencesComplaints(
+        solutionDir,
+        shouldComplainAboutUnusedRules: true,
+        rules);
+    // or var complaints = ProjectsRuler.GetPackageReferencesComplaints(
+    //     solutionDir,
+    //     shouldComplainAboutUnusedRules: true,
+    //     rules);
+
+    Assert.IsEmpty(complaints);
+}
+```
+
+When enabled, unused rules will be reported in the output as:
+```
+Unused rules:
+Rule description 1
+Rule description 2
+```
+
+This feature is **opt-in** and backward-compatible. Existing code will continue to work without any changes.
+
 # Project references exitence check
 
 There is a dedicated checker for that. It uses the same csproj parser as all the other tools in the ruler: **CsprojReferencesExtractor**.
