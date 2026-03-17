@@ -14,10 +14,10 @@ namespace ProjectReferencesRuler
 
         public static string GetProjectReferencesComplaints(
             string solutionDir,
-            bool shouldComplainAboutUnusedRules,
+            bool complainAboutUnusedRules,
             params ReferenceRule[] rules)
         {
-            return GetProjectReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules, rules);
+            return GetProjectReferencesComplaints(solutionDir, null, complainAboutUnusedRules, rules);
         }
 
         public static string GetProjectReferencesComplaints(
@@ -25,16 +25,16 @@ namespace ProjectReferencesRuler
             string excludedProjects = null,
             params ReferenceRule[] rules)
         {
-            return GetProjectReferencesComplaints(solutionDir, excludedProjects, shouldComplainAboutUnusedRules: false, rules);
+            return GetProjectReferencesComplaints(solutionDir, excludedProjects, complainAboutUnusedRules: false, rules);
         }
 
         public static string GetProjectReferencesComplaints(
             string solutionDir,
             string excludedProjects,
-            bool shouldComplainAboutUnusedRules,
+            bool complainAboutUnusedRules,
             params ReferenceRule[] rules)
         {
-            return GetRunner(solutionDir, excludedProjects, rules, shouldComplainAboutUnusedRules).GetComplaintsForProjectReferences();
+            return GetRunner(solutionDir, excludedProjects, rules, complainAboutUnusedRules).GetComplaintsForProjectReferences();
         }
 
         public static string GetPackageReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
