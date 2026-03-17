@@ -39,7 +39,7 @@ namespace ProjectReferencesRuler
 
         public static string GetPackageReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
         {
-            return GetPackageReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules: false, rules);
+            return GetPackageReferencesComplaints(solutionDir, null, complainAboutUnusedRules: false, rules);
         }
 
         public static string GetPackageReferencesComplaints(
@@ -55,30 +55,30 @@ namespace ProjectReferencesRuler
             string excludedProjects = null,
             params ReferenceRule[] rules)
         {
-            return GetPackageReferencesComplaints(solutionDir, excludedProjects, shouldComplainAboutUnusedRules: false, rules);
+            return GetPackageReferencesComplaints(solutionDir, excludedProjects, complainAboutUnusedRules: false, rules);
         }
 
         public static string GetPackageReferencesComplaints(
             string solutionDir,
             string excludedProjects,
-            bool shouldComplainAboutUnusedRules,
+            bool complainAboutUnusedRules,
             params ReferenceRule[] rules)
         {
-            return GetRunner(solutionDir, excludedProjects, rules, shouldComplainAboutUnusedRules).GetComplaintsForPackageReferences();
+            return GetRunner(solutionDir, excludedProjects, rules, complainAboutUnusedRules).GetComplaintsForPackageReferences();
         }
 
         private static ReferencesRulerRunner GetRunner(
             string solutionDir,
             string excludedProjectsRegex,
             IReadOnlyList<ReferenceRule> rules,
-            bool shouldComplainAboutUnusedRules)
+            bool complainAboutUnusedRules)
         {
             return new ReferencesRulerRunner(
                 extractor: new CsprojReferencesExtractor(),
                 referencesRuler: new ReferencesRuler(
                     patternParser: new WildcardPatternParser(),
                     rules: rules,
-                    complainAboutUnusedRules: shouldComplainAboutUnusedRules),
+                    complainAboutUnusedRules: complainAboutUnusedRules),
                 filesRunner: new ProjectFilesRunner(
                     solutionPath: solutionDir,
                     filesExtension: "*.csproj",

@@ -17,7 +17,7 @@ namespace ProjectReferencesRuler.Rules.References
         private readonly IReadOnlyList<ReferenceRule> _explicitlyForbiddenRules;
         private readonly IReadOnlyList<ReferenceRule> _allRules;
         private readonly HashSet<ReferenceRule> _usedRules = new();
-        private readonly bool _shouldComplainAboutUnusedRules;
+        private readonly bool _complainAboutUnusedRules;
 
         public ReferencesRuler(
             IPatternParser patternParser,
@@ -29,7 +29,7 @@ namespace ProjectReferencesRuler.Rules.References
             _allowingRules = rules.Where(r => r.Kind == RuleKind.Allowed).ToList();
             _explicitlyForbiddenRules = rules.Where(r => r.Kind == RuleKind.ExplicitlyForbidden).ToList();
             _allRules = rules.ToList();
-            _shouldComplainAboutUnusedRules = complainAboutUnusedRules;
+            _complainAboutUnusedRules = complainAboutUnusedRules;
         }
 
         public string GiveMeComplaints(Reference reference)
@@ -58,7 +58,7 @@ namespace ProjectReferencesRuler.Rules.References
 
         public string GiveMeUnusedRulesComplaints()
         {
-            if (!_shouldComplainAboutUnusedRules)
+            if (!_complainAboutUnusedRules)
             {
                 return string.Empty;
             }
