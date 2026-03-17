@@ -9,7 +9,7 @@ namespace ProjectReferencesRuler
     {
         public static string GetProjectReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
         {
-            return GetProjectReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules: false, rules);
+            return GetProjectReferencesComplaints(solutionDir, null, complainAboutUnusedRules: false, rules);
         }
 
         public static string GetProjectReferencesComplaints(
