@@ -15,13 +15,21 @@ namespace ProjectReferencesRuler.Rules.References
         private readonly IReadOnlyList<ReferenceRule> _forbiddingRules;
         private readonly IReadOnlyList<ReferenceRule> _allowingRules;
         private readonly IReadOnlyList<ReferenceRule> _explicitlyForbiddenRules;
+        private readonly IReadOnlyList<ReferenceRule> _allRules;
+        private readonly HashSet<ReferenceRule> _usedRules = new();
+        private readonly bool _shouldComplainAboutUnusedRules;
 
-        public ReferencesRuler(IPatternParser patternParser, IReadOnlyList<ReferenceRule> rules)
+        public ReferencesRuler(
+            IPatternParser patternParser,
+            IReadOnlyList<ReferenceRule> rules,
+            bool shouldComplainAboutUnusedRules = false)
         {
             _patternParser = patternParser;
             _forbiddingRules = rules.Where(r => r.Kind == RuleKind.Forbidden).ToList();
             _allowingRules = rules.Where(r => r.Kind == RuleKind.Allowed).ToList();
             _explicitlyForbiddenRules = rules.Where(r => r.Kind == RuleKind.ExplicitlyForbidden).ToList();
+            _allRules = rules.ToList();
+            _shouldComplainAboutUnusedRules = shouldComplainAboutUnusedRules;
         }
 
         public string GiveMeComplaints(Reference reference)
@@ -46,6 +54,22 @@ namespace ProjectReferencesRuler.Rules.References
             }
 
             return $"Reference from {reference.From} to {reference.To} broke:\n{complaints}";
+        }
+
+        public string GiveMeUnusedRulesComplaints()
+        {
+            if (!_shouldComplainAboutUnusedRules)
+            {
+                return string.Empty;
+            }
+
+            var complaints = string.Join("\n", _allRules.Where(r => !_usedRules.Contains(r)).Select(r => r.Description));
+            if (string.IsNullOrEmpty(complaints))
+            {
+                return string.Empty;
+            }
+
+            return $"Unused rules:\n{complaints}";
         }
 
         private IEnumerable<ReferenceRule> GetGenerallyForbiddenRules(Reference reference)
@@ -73,6 +97,7 @@ namespace ProjectReferencesRuler.Rules.References
                     && DoesVersionRuleMatch(reference, rule)
                     && rule.Kind == kind)
                 {
+                    _usedRules.Add(rule);
                     yield return rule;
                 }
             }

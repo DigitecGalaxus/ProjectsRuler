@@ -135,5 +135,36 @@ namespace ProjectReferencesRuler.Rules.References
 
             Assert.True(string.IsNullOrEmpty(complaints));
         }
+
+        [Fact]
+        public void GiveMeUnusedRulesComplaints_OptedOut_ReturnsNoComplaints()
+        {
+            var ruler = new ReferencesRuler(
+                patternParser: new RegexPatternParser(),
+                rules: new[] { new ReferenceRule("a", "b", RuleKind.Forbidden, description: "no no") });
+
+            ruler.GiveMeComplaints(new Reference(from: "x", to: "y", isPrivateAssetsAllSet: true, versionOrNull: null));
+            var complaints = ruler.GiveMeUnusedRulesComplaints();
+
+            Assert.True(string.IsNullOrEmpty(complaints));
+        }
+
+        [Fact]
+        public void GiveMeUnusedRulesComplaints_OptedIn_ReturnsOnlyUnusedRules()
+        {
+            var ruler = new ReferencesRuler(
+                patternParser: new RegexPatternParser(),
+                rules: new[]
+                {
+                    new ReferenceRule("a", "b", RuleKind.Forbidden, description: "used"),
+                    new ReferenceRule("x", "y", RuleKind.Forbidden, description: "unused")
+                },
+                shouldComplainAboutUnusedRules: true);
+
+            ruler.GiveMeComplaints(new Reference(from: "a", to: "b", isPrivateAssetsAllSet: true, versionOrNull: null));
+            var complaints = ruler.GiveMeUnusedRulesComplaints();
+
+            Assert.Equal("Unused rules:\nunused", complaints);
+        }
     }
 }

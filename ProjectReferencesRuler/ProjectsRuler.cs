@@ -9,7 +9,15 @@ namespace ProjectReferencesRuler
     {
         public static string GetProjectReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
         {
-            return GetProjectReferencesComplaints(solutionDir, null, rules);
+            return GetProjectReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules: false, rules);
+        }
+
+        public static string GetProjectReferencesComplaints(
+            string solutionDir,
+            bool shouldComplainAboutUnusedRules,
+            params ReferenceRule[] rules)
+        {
+            return GetProjectReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules, rules);
         }
 
         public static string GetProjectReferencesComplaints(
@@ -17,12 +25,29 @@ namespace ProjectReferencesRuler
             string excludedProjects = null,
             params ReferenceRule[] rules)
         {
-            return GetRunner(solutionDir, excludedProjects, rules).GetComplaintsForProjectReferences();
+            return GetProjectReferencesComplaints(solutionDir, excludedProjects, shouldComplainAboutUnusedRules: false, rules);
+        }
+
+        public static string GetProjectReferencesComplaints(
+            string solutionDir,
+            string excludedProjects,
+            bool shouldComplainAboutUnusedRules,
+            params ReferenceRule[] rules)
+        {
+            return GetRunner(solutionDir, excludedProjects, rules, shouldComplainAboutUnusedRules).GetComplaintsForProjectReferences();
         }
 
         public static string GetPackageReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
         {
-            return GetPackageReferencesComplaints(solutionDir, null, rules);
+            return GetPackageReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules: false, rules);
+        }
+
+        public static string GetPackageReferencesComplaints(
+            string solutionDir,
+            bool shouldComplainAboutUnusedRules,
+            params ReferenceRule[] rules)
+        {
+            return GetPackageReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules, rules);
         }
 
         public static string GetPackageReferencesComplaints(
@@ -30,19 +55,30 @@ namespace ProjectReferencesRuler
             string excludedProjects = null,
             params ReferenceRule[] rules)
         {
-            return GetRunner(solutionDir, excludedProjects, rules).GetComplaintsForPackageReferences();
+            return GetPackageReferencesComplaints(solutionDir, excludedProjects, shouldComplainAboutUnusedRules: false, rules);
+        }
+
+        public static string GetPackageReferencesComplaints(
+            string solutionDir,
+            string excludedProjects,
+            bool shouldComplainAboutUnusedRules,
+            params ReferenceRule[] rules)
+        {
+            return GetRunner(solutionDir, excludedProjects, rules, shouldComplainAboutUnusedRules).GetComplaintsForPackageReferences();
         }
 
         private static ReferencesRulerRunner GetRunner(
             string solutionDir,
             string excludedProjectsRegex,
-            IReadOnlyList<ReferenceRule> rules)
+            IReadOnlyList<ReferenceRule> rules,
+            bool shouldComplainAboutUnusedRules)
         {
             return new ReferencesRulerRunner(
                 extractor: new CsprojReferencesExtractor(),
                 referencesRuler: new ReferencesRuler(
                     patternParser: new WildcardPatternParser(),
-                    rules: rules),
+                    rules: rules,
+                    shouldComplainAboutUnusedRules: shouldComplainAboutUnusedRules),
                 filesRunner: new ProjectFilesRunner(
                     solutionPath: solutionDir,
                     filesExtension: "*.csproj",
