@@ -22,7 +22,7 @@ namespace ProjectReferencesRuler.Rules.References
         public ReferencesRuler(
             IPatternParser patternParser,
             IReadOnlyList<ReferenceRule> rules,
-            bool shouldComplainAboutUnusedRules = false)
+            bool complainAboutUnusedRules = false)
         {
             _patternParser = patternParser;
             _forbiddingRules = rules.Where(r => r.Kind == RuleKind.Forbidden).ToList();
