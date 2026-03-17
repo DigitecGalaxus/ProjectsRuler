@@ -29,7 +29,7 @@ namespace ProjectReferencesRuler.Rules.References
             _allowingRules = rules.Where(r => r.Kind == RuleKind.Allowed).ToList();
             _explicitlyForbiddenRules = rules.Where(r => r.Kind == RuleKind.ExplicitlyForbidden).ToList();
             _allRules = rules.ToList();
-            _shouldComplainAboutUnusedRules = shouldComplainAboutUnusedRules;
+            _shouldComplainAboutUnusedRules = complainAboutUnusedRules;
         }
 
         public string GiveMeComplaints(Reference reference)

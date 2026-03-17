@@ -159,7 +159,7 @@ namespace ProjectReferencesRuler.Rules.References
                     new ReferenceRule("a", "b", RuleKind.Forbidden, description: "used"),
                     new ReferenceRule("x", "y", RuleKind.Forbidden, description: "unused")
                 },
-                shouldComplainAboutUnusedRules: true);
+                complainAboutUnusedRules: true);
 
             ruler.GiveMeComplaints(new Reference(from: "a", to: "b", isPrivateAssetsAllSet: true, versionOrNull: null));
             var complaints = ruler.GiveMeUnusedRulesComplaints();

@@ -78,7 +78,7 @@ namespace ProjectReferencesRuler
                 referencesRuler: new ReferencesRuler(
                     patternParser: new WildcardPatternParser(),
                     rules: rules,
-                    shouldComplainAboutUnusedRules: shouldComplainAboutUnusedRules),
+                    complainAboutUnusedRules: shouldComplainAboutUnusedRules),
                 filesRunner: new ProjectFilesRunner(
                     solutionPath: solutionDir,
                     filesExtension: "*.csproj",
