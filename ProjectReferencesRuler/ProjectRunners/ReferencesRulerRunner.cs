@@ -34,7 +34,20 @@ namespace ProjectReferencesRuler.ProjectRunners
 
         private string GetComplaintsForReferences(Func<string, IEnumerable<Reference>> getReferences)
         {
-            return _filesRunner.CollectComplaintsForFiles(fileName => GetReferencesComplaints(getReferences, fileName));
+            var referencesComplaints = _filesRunner.CollectComplaintsForFiles(fileName => GetReferencesComplaints(getReferences, fileName));
+            var unusedRulesComplaints = referencesRuler.GiveMeUnusedRulesComplaints();
+
+            if (string.IsNullOrEmpty(unusedRulesComplaints))
+            {
+                return referencesComplaints;
+            }
+
+            if (string.IsNullOrEmpty(referencesComplaints))
+            {
+                return unusedRulesComplaints;
+            }
+
+            return $"{referencesComplaints}\n{unusedRulesComplaints}";
         }
 
         private IEnumerable<string> GetReferencesComplaints(

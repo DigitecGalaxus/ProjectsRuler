@@ -1,0 +1,16 @@
+name: 📦 Release ProjectsRuler NuGets
+run-name: 📦 Releasing NuGets of ProjectsRuler
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+jobs:
+  release_ProjectsRuler:
+    name: Build and release ProjectsRuler package
+    uses: DigitecGalaxus/actions/.github/workflows/reusable-release-nuget.yml@v4
+    secrets: inherit
+    with:
+      proj-or-sln: dotnet/src/ProjectsRuler/ProjectsRuler.csproj

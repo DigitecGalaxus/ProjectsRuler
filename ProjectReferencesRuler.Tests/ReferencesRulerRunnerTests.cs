@@ -13,6 +13,7 @@ namespace ProjectReferencesRuler
         {
             var extractorMock = new Mock<IReferencesExtractor>();
             var rulerMock = new Mock<IReferencesRuler>();
+            rulerMock.Setup(r => r.GiveMeUnusedRulesComplaints()).Returns(string.Empty);
             var runner = new ReferencesRulerRunner(
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
@@ -36,6 +37,9 @@ namespace ProjectReferencesRuler
             var rulerMock = new Mock<IReferencesRuler>();
             rulerMock
                 .Setup(r => r.GiveMeComplaints(It.IsAny<Reference>()))
+                .Returns(string.Empty);
+            rulerMock
+                .Setup(r => r.GiveMeUnusedRulesComplaints())
                 .Returns(string.Empty);
             var runner = new ReferencesRulerRunner(
                 extractor: extractorMock.Object,
@@ -61,6 +65,9 @@ namespace ProjectReferencesRuler
             rulerMock
                 .Setup(r => r.GiveMeComplaints(It.IsAny<Reference>()))
                 .Returns("Aarrr!");
+            rulerMock
+                .Setup(r => r.GiveMeUnusedRulesComplaints())
+                .Returns(string.Empty);
             var runner = new ReferencesRulerRunner(
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
@@ -72,11 +79,38 @@ namespace ProjectReferencesRuler
 
             Assert.Equal("Aarrr!\nAarrr!\nAarrr!\nAarrr!\nAarrr!\nAarrr!\nAarrr!", complaints);
         }
+
+        [Fact]
+        public void GetComplaintsForProjectReferences_RulerHasUnusedRuleComplaints_AppendsThemAtTheEnd()
+        {
+            var extractorMock = new Mock<IReferencesExtractor>();
+            extractorMock
+                .Setup(e => e.GetProjectReferences(It.IsAny<string>()))
+                .Returns(new[] { new Reference(from: "source", to: "someReference", isPrivateAssetsAllSet: true, versionOrNull: null), });
+            var rulerMock = new Mock<IReferencesRuler>();
+            rulerMock
+                .Setup(r => r.GiveMeComplaints(It.IsAny<Reference>()))
+                .Returns("Aarrr!");
+            rulerMock
+                .Setup(r => r.GiveMeUnusedRulesComplaints())
+                .Returns("Unused rules:\nrule x");
+            var runner = new ReferencesRulerRunner(
+                extractor: extractorMock.Object,
+                referencesRuler: rulerMock.Object,
+                filesRunner: new ProjectFilesRunner(
+                    solutionPath: @"../../../TestProjectFiles/",
+                    filesExtension: "*.xml"));
+
+            var complaints = runner.GetComplaintsForProjectReferences();
+
+            Assert.Equal("Aarrr!\nAarrr!\nAarrr!\nAarrr!\nAarrr!\nAarrr!\nAarrr!\nUnused rules:\nrule x", complaints);
+        }
         [Fact]
         public void GetComplaintsForPackageReferences_GivenTestProjectFilesDirectory_ExtractsReferencesFromAllGivenFiles()
         {
             var extractorMock = new Mock<IReferencesExtractor>();
             var rulerMock = new Mock<IReferencesRuler>();
+            rulerMock.Setup(r => r.GiveMeUnusedRulesComplaints()).Returns(string.Empty);
             var runner = new ReferencesRulerRunner(
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
@@ -100,6 +134,9 @@ namespace ProjectReferencesRuler
             var rulerMock = new Mock<IReferencesRuler>();
             rulerMock
                 .Setup(r => r.GiveMeComplaints(It.IsAny<Reference>()))
+                .Returns(string.Empty);
+            rulerMock
+                .Setup(r => r.GiveMeUnusedRulesComplaints())
                 .Returns(string.Empty);
             var runner = new ReferencesRulerRunner(
                 extractor: extractorMock.Object,
@@ -125,6 +162,9 @@ namespace ProjectReferencesRuler
             rulerMock
                 .Setup(r => r.GiveMeComplaints(It.IsAny<Reference>()))
                 .Returns("Aarrr!");
+            rulerMock
+                .Setup(r => r.GiveMeUnusedRulesComplaints())
+                .Returns(string.Empty);
             var runner = new ReferencesRulerRunner(
                 extractor: extractorMock.Object,
                 referencesRuler: rulerMock.Object,
