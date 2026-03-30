@@ -9,6 +9,7 @@
         <license type="expression">MIT</license>
         <projectUrl>https://github.com/DigitecGalaxus/ProjectsRuler</projectUrl>
         <icon>images\logo.png</icon>
+        <readme>README.md</readme>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>Governance library for writing unit tests to check for forbidden .csproj references.</summary>
         <description>Governance library for writing unit tests to check for forbidden .csproj references.
