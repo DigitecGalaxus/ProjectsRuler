@@ -25,7 +25,9 @@ namespace ProjectReferencesRuler
             var path = "this does not work.png";
             var solutionParser = new SolutionParser();
 
-            Assert.Throws<NotSupportedException>(() => solutionParser.ExtractSolutionProjects(path, ".csproj"));
+            Assert.Throws<NotSupportedException>(() =>
+                solutionParser.ExtractSolutionProjects(path, ".csproj")
+            );
         }
 
         [Fact]
@@ -45,17 +47,21 @@ namespace ProjectReferencesRuler
             var path = @"../../../TestSolutionFiles/SmallSolution.txt";
             var solutionParser = new SolutionParser();
 
-            var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
+            var paths = solutionParser
+                .ExtractSolutionProjects(path, ".csproj")
+                .Select(sp => sp.ProjectPath)
+                .ToList();
 
             Assert.NotEmpty(paths);
             Assert.Equal(
-                new []
+                new[]
                 {
                     @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
                     @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Contracts/Dg.CustomerService.Contracts.csproj",
-                    @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj"
+                    @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj",
                 },
-                paths);
+                paths
+            );
         }
 
         [Fact]
@@ -64,17 +70,44 @@ namespace ProjectReferencesRuler
             var path = @"../../../TestSolutionFiles/SmallSolution.xml";
             var solutionParser = new SolutionParser();
 
-            var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
+            var paths = solutionParser
+                .ExtractSolutionProjects(path, ".csproj")
+                .Select(sp => sp.ProjectPath)
+                .ToList();
 
             Assert.NotEmpty(paths);
             Assert.Equal(
-                new []
+                new[]
                 {
                     @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Contracts/Dg.CustomerService.Contracts.csproj",
                     @"../../../TestSolutionFiles/CustomerService/Dg.CustomerService.Monolith/Dg.CustomerService.Monolith.csproj",
-                    @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj"
+                    @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
                 },
-                paths);
+                paths
+            );
+        }
+
+        [Fact]
+        public void ExtractProjectPaths_RealSlnxExtension_ReturnsPaths()
+        {
+            var path = @"../../../../ProjectsRuler.slnx";
+            var solutionParser = new SolutionParser();
+
+            var paths = solutionParser
+                .ExtractSolutionProjects(path, ".csproj")
+                .Select(sp => sp.ProjectPath)
+                .ToList();
+
+            Assert.NotEmpty(paths);
+            Assert.Equal(2, paths.Count);
+            Assert.Contains(
+                paths,
+                p => p.EndsWith("ProjectReferencesRuler/ProjectReferencesRuler.csproj")
+            );
+            Assert.Contains(
+                paths,
+                p => p.EndsWith("ProjectReferencesRuler.Tests/ProjectReferencesRuler.Tests.csproj")
+            );
         }
 
         [Fact]
@@ -83,17 +116,21 @@ namespace ProjectReferencesRuler
             var path = @"../../../TestSolutionFiles/SmallSolution.txt";
             var solutionParser = new SolutionParser();
 
-            var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectGuid).ToList();
+            var paths = solutionParser
+                .ExtractSolutionProjects(path, ".csproj")
+                .Select(sp => sp.ProjectGuid)
+                .ToList();
 
             Assert.NotEmpty(paths);
             Assert.Equal(
-                new []
+                new[]
                 {
                     @"FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
                     @"FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
-                    @"FAE04EC0-301F-11D3-BF4B-00C04F79EFBC"
+                    @"FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
                 },
-                paths);
+                paths
+            );
         }
 
         [Fact]
@@ -102,15 +139,19 @@ namespace ProjectReferencesRuler
             var path = @"../../../TestSolutionFiles/SolutionWithFolders.txt";
             var solutionParser = new SolutionParser();
 
-            var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
+            var paths = solutionParser
+                .ExtractSolutionProjects(path, ".csproj")
+                .Select(sp => sp.ProjectPath)
+                .ToList();
 
             Assert.NotEmpty(paths);
             Assert.Equal(
-                new []
+                new[]
                 {
                     @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
                 },
-                paths);
+                paths
+            );
         }
 
         [Fact]
@@ -119,15 +160,19 @@ namespace ProjectReferencesRuler
             var path = @"../../../TestSolutionFiles/SolutionWithFolders.xml";
             var solutionParser = new SolutionParser();
 
-            var paths = solutionParser.ExtractSolutionProjects(path, ".csproj").Select(sp => sp.ProjectPath).ToList();
+            var paths = solutionParser
+                .ExtractSolutionProjects(path, ".csproj")
+                .Select(sp => sp.ProjectPath)
+                .ToList();
 
             Assert.NotEmpty(paths);
             Assert.Equal(
-                new []
+                new[]
                 {
                     @"../../../TestSolutionFiles/devinite.PortalSystem/devinite.PortalSystem.csproj",
                 },
-                paths);
+                paths
+            );
         }
 
         [Fact]
