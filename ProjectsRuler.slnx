@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ProjectReferencesRuler.Tests/ProjectReferencesRuler.Tests.csproj" />
+  <Project Path="ProjectReferencesRuler/ProjectReferencesRuler.csproj" />
+</Solution>

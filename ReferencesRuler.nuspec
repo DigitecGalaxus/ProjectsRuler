@@ -3,22 +3,23 @@
     <metadata minClientVersion="4.3">
         <id>ReferencesRuler</id>
         <title>Project references ruler</title>
-        <version>1.2.0</version>
+        <version>1.3.0</version>
         <authors>Boško Stupar</authors>
         <owners>bosko.stupar, DigitecGalaxus</owners>
         <license type="expression">MIT</license>
         <projectUrl>https://github.com/DigitecGalaxus/ProjectsRuler</projectUrl>
         <icon>images\logo.png</icon>
+        <readme>README.md</readme>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>Governance library for writing unit tests to check for forbidden .csproj references.</summary>
         <description>Governance library for writing unit tests to check for forbidden .csproj references.
-        It allows the developer to write declarative rules to steer the architecture within the same application.
+        It allows the developer to write declarative rules to steer the architecture within the same (monolithic) application.
         It relies on having the source code around when running unit tests.</description>
         <language>en-US</language>
         <repository type="git" url="https://github.com/DigitecGalaxus/ProjectsRuler.git" branch="master"/>
         <tags>governance architecture dotnet dotnetcore unittest rules references digitec galaxus digitecgalaxus</tags>
         <copyright>2019-2020 Digitec Galaxus AG</copyright>
-        <releaseNotes>Use newer (correct) logo</releaseNotes>
+        <releaseNotes>Added opt-in complaints to unused rules, and marked the .sln file check obsolete.</releaseNotes>
         <dependencies>
             <group targetFramework=".netstandard2.0" />
         </dependencies>

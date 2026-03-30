@@ -17,6 +17,12 @@ The ReferencesRuler is highly modular and extensible. You can use its components
 
 The main limitation: **It relies on having the sourcecode while running the tests!**
 
+## Solution format support
+
+- `.slnx` is supported.
+- Classic `.sln` is still supported for backward compatibility. It will be removed with the next major release.
+- `SolutionProjectGuidChecker` and `SolutionProject.ProjectGuid` are now **obsolete** and should be phased out during migration. They will be removed with the next major release.
+
 # Getting Started
 
 1. Get the nuget package [ReferencesRuler](https://www.nuget.org/packages/ReferencesRuler/)
@@ -87,9 +93,9 @@ private void AssertReferenceRules(params ReferenceRule[] rules)
 }
 ```
 
-## Reporting unused rules
+## Reporting unused rules (opt-in)
 
-By default, the ruler only reports complaints when a rule is violated. You can opt-in to also report rules that were never matched by any reference. This is useful to detect stale or overly specific rules in your ruleset.
+By default, the ruler only reports complaints when a rule is violated. You can opt-in to also report rules that were never matched by any reference. This helps detect stale or overly specific rules and keep the ruleset small.
 
 ```C#
 [Test]
@@ -98,9 +104,18 @@ public void CheckForUnusedRules()
     var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     var solutionDir = Path.Combine(dir, @"..\..\..\");
 
+    var rules = new[]
+    {
+        new ReferenceRule(
+            patternFrom: @"*B*",
+            patternTo: @"*A*",
+            RuleKind.Forbidden,
+            description: "B Projects must not reference A")
+    };
+
     var complaints = ProjectsRuler.GetProjectReferencesComplaints(
         solutionDir,
-        shouldComplainAboutUnusedRules: true,
+        true,
         rules);
     // or var complaints = ProjectsRuler.GetPackageReferencesComplaints(
     //     solutionDir,
@@ -118,7 +133,7 @@ Rule description 1
 Rule description 2
 ```
 
-This feature is **opt-in** and backward-compatible. Existing code will continue to work without any changes.
+This feature is **opt-in** and backward-compatible, so existing tests continue to work unchanged and can be migrated step by step.
 
 # Project references exitence check
 
@@ -130,7 +145,7 @@ public void CheckForBrokenReferences()
 {
     var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     var solutionDir = Path.Combine(dir, @"..\..\..\");
-    var solutionFilePath = Path.Combine(solutionDir, "MySolution.sln");
+    var solutionFilePath = Path.Combine(solutionDir, "MySolution.slnx");
     var checker = new ReferencesExistenceChecker(
         new SolutionParser(),
         new CsprojReferencesExtractor());
@@ -144,7 +159,11 @@ public void CheckForBrokenReferences()
 }
 ```
 
-# Solution file validity check
+# Legacy (.sln) solution GUID validity check (obsolete)
+
+This check validates classic `.sln` project GUIDs and is now considered obsolete. It is kept only to support gradual migration.
+
+For `.slnx`, project GUIDs are not part of the format, so this check is not applicable.
 
 There is a change in the solution file format since the .net core. This code snippet checks all the solution files in the repository rood directory. It ignores folders. It only checks the projects with the given file extension.
 
@@ -169,6 +188,18 @@ public void CheckIfSolutionHasAllValidProjectGuids()
     Assert.IsEmpty(complaints);
 }
 ```
+
+## Migration from .sln to .slnx
+
+1. Generate `.slnx` from your existing `.sln`:
+
+```bash
+dotnet sln YourSolution.sln migrate
+```
+
+2. Update tests/checks that reference solution files to use `.slnx`.
+3. Keep legacy `.sln` checks only temporarily (`SolutionProjectGuidChecker`/`ProjectGuid` are obsolete).
+4. Remove `.sln`-specific checks once your migration is complete.
 
 # Advanced extensibility
 
