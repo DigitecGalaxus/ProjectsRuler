@@ -7,82 +7,130 @@ namespace ProjectReferencesRuler
 {
     public static class ProjectsRuler
     {
-        public static string GetProjectReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
+        public static string GetProjectReferencesComplaints(
+            string solutionDir,
+            params ReferenceRule[] rules
+        )
         {
-            return GetProjectReferencesComplaints(solutionDir, null, complainAboutUnusedRules: false, rules);
+            return GetProjectReferencesComplaints(
+                solutionDir,
+                null,
+                reportUnusedExceptionRules: false,
+                rules
+            );
         }
 
         public static string GetProjectReferencesComplaints(
             string solutionDir,
-            bool complainAboutUnusedRules,
-            params ReferenceRule[] rules)
+            bool reportUnusedExceptionRules,
+            params ReferenceRule[] rules
+        )
         {
-            return GetProjectReferencesComplaints(solutionDir, null, complainAboutUnusedRules, rules);
+            return GetProjectReferencesComplaints(
+                solutionDir,
+                null,
+                reportUnusedExceptionRules,
+                rules
+            );
         }
 
         public static string GetProjectReferencesComplaints(
             string solutionDir,
             string excludedProjects = null,
-            params ReferenceRule[] rules)
+            params ReferenceRule[] rules
+        )
         {
-            return GetProjectReferencesComplaints(solutionDir, excludedProjects, complainAboutUnusedRules: false, rules);
+            return GetProjectReferencesComplaints(
+                solutionDir,
+                excludedProjects,
+                reportUnusedExceptionRules: false,
+                rules
+            );
         }
 
         public static string GetProjectReferencesComplaints(
             string solutionDir,
             string excludedProjects,
-            bool complainAboutUnusedRules,
-            params ReferenceRule[] rules)
+            bool reportUnusedExceptionRules,
+            params ReferenceRule[] rules
+        )
         {
-            return GetRunner(solutionDir, excludedProjects, rules, complainAboutUnusedRules).GetComplaintsForProjectReferences();
-        }
-
-        public static string GetPackageReferencesComplaints(string solutionDir, params ReferenceRule[] rules)
-        {
-            return GetPackageReferencesComplaints(solutionDir, null, complainAboutUnusedRules: false, rules);
+            return GetRunner(solutionDir, excludedProjects, rules, reportUnusedExceptionRules)
+                .GetComplaintsForProjectReferences();
         }
 
         public static string GetPackageReferencesComplaints(
             string solutionDir,
-            bool shouldComplainAboutUnusedRules,
-            params ReferenceRule[] rules)
+            params ReferenceRule[] rules
+        )
         {
-            return GetPackageReferencesComplaints(solutionDir, null, shouldComplainAboutUnusedRules, rules);
+            return GetPackageReferencesComplaints(
+                solutionDir,
+                null,
+                reportUnusedExceptionRules: false,
+                rules
+            );
+        }
+
+        public static string GetPackageReferencesComplaints(
+            string solutionDir,
+            bool shouldReportUnusedExceptionRules,
+            params ReferenceRule[] rules
+        )
+        {
+            return GetPackageReferencesComplaints(
+                solutionDir,
+                null,
+                shouldReportUnusedExceptionRules,
+                rules
+            );
         }
 
         public static string GetPackageReferencesComplaints(
             string solutionDir,
             string excludedProjects = null,
-            params ReferenceRule[] rules)
+            params ReferenceRule[] rules
+        )
         {
-            return GetPackageReferencesComplaints(solutionDir, excludedProjects, complainAboutUnusedRules: false, rules);
+            return GetPackageReferencesComplaints(
+                solutionDir,
+                excludedProjects,
+                reportUnusedExceptionRules: false,
+                rules
+            );
         }
 
         public static string GetPackageReferencesComplaints(
             string solutionDir,
             string excludedProjects,
-            bool complainAboutUnusedRules,
-            params ReferenceRule[] rules)
+            bool reportUnusedExceptionRules,
+            params ReferenceRule[] rules
+        )
         {
-            return GetRunner(solutionDir, excludedProjects, rules, complainAboutUnusedRules).GetComplaintsForPackageReferences();
+            return GetRunner(solutionDir, excludedProjects, rules, reportUnusedExceptionRules)
+                .GetComplaintsForPackageReferences();
         }
 
         private static ReferencesRulerRunner GetRunner(
             string solutionDir,
             string excludedProjectsRegex,
             IReadOnlyList<ReferenceRule> rules,
-            bool complainAboutUnusedRules)
+            bool reportUnusedExceptionRules
+        )
         {
             return new ReferencesRulerRunner(
                 extractor: new CsprojReferencesExtractor(),
                 referencesRuler: new ReferencesRuler(
                     patternParser: new WildcardPatternParser(),
                     rules: rules,
-                    complainAboutUnusedRules: complainAboutUnusedRules),
+                    reportUnusedExceptionRules: reportUnusedExceptionRules
+                ),
                 filesRunner: new ProjectFilesRunner(
                     solutionPath: solutionDir,
                     filesExtension: "*.csproj",
-                    excludedProjectsRegex));
+                    excludedProjectsRegex
+                )
+            );
         }
     }
 }

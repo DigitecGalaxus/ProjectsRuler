@@ -17,19 +17,22 @@ namespace ProjectReferencesRuler.Rules.References
         private readonly IReadOnlyList<ReferenceRule> _explicitlyForbiddenRules;
         private readonly IReadOnlyList<ReferenceRule> _allRules;
         private readonly HashSet<ReferenceRule> _usedRules = new();
-        private readonly bool _complainAboutUnusedRules;
+        private readonly bool _reportUnusedExceptionRules;
 
         public ReferencesRuler(
             IPatternParser patternParser,
             IReadOnlyList<ReferenceRule> rules,
-            bool complainAboutUnusedRules = false)
+            bool reportUnusedExceptionRules = false
+        )
         {
             _patternParser = patternParser;
             _forbiddingRules = rules.Where(r => r.Kind == RuleKind.Forbidden).ToList();
             _allowingRules = rules.Where(r => r.Kind == RuleKind.Allowed).ToList();
-            _explicitlyForbiddenRules = rules.Where(r => r.Kind == RuleKind.ExplicitlyForbidden).ToList();
+            _explicitlyForbiddenRules = rules
+                .Where(r => r.Kind == RuleKind.ExplicitlyForbidden)
+                .ToList();
             _allRules = rules.ToList();
-            _complainAboutUnusedRules = complainAboutUnusedRules;
+            _reportUnusedExceptionRules = reportUnusedExceptionRules;
         }
 
         public string GiveMeComplaints(Reference reference)
@@ -37,7 +40,10 @@ namespace ProjectReferencesRuler.Rules.References
             var explicitlyForbiddenRules = GetExplicitlyForbiddenRules(reference).ToList();
 
             var generallyForbiddenRules = GetGenerallyForbiddenRules(reference);
-            var areGeneralRolesOverriddenByExplicitlyAllowedRule = GetExplicitlyAllowedRules(reference).Any();
+            var areGeneralRolesOverriddenByExplicitlyAllowedRule = GetExplicitlyAllowedRules(
+                    reference
+                )
+                .Any();
             if (!explicitlyForbiddenRules.Any() && areGeneralRolesOverriddenByExplicitlyAllowedRule)
             {
                 return string.Empty;
@@ -58,44 +64,69 @@ namespace ProjectReferencesRuler.Rules.References
 
         public string GiveMeUnusedRulesComplaints()
         {
-            if (!_complainAboutUnusedRules)
+            if (!_reportUnusedExceptionRules)
             {
                 return string.Empty;
             }
 
-            var complaints = string.Join("\n", _allRules.Where(r => !_usedRules.Contains(r)).Select(r => r.Description));
+            var complaints = string.Join(
+                "\n",
+                _allowingRules
+                    .Where(r => !_usedRules.Contains(r))
+                    .Select(r =>
+                        $"[{r.Kind}] from '{r.PatternFrom}' to '{r.PatternTo}': {r.Description}"
+                    )
+            );
             if (string.IsNullOrEmpty(complaints))
             {
                 return string.Empty;
             }
 
-            return $"Unused rules:\n{complaints}";
+            return $"Unused exception rules:\n{complaints}";
         }
 
         private IEnumerable<ReferenceRule> GetGenerallyForbiddenRules(Reference reference)
         {
-            return GetMatchingRules(rules: _forbiddingRules, reference: reference, kind: RuleKind.Forbidden);
+            return GetMatchingRules(
+                rules: _forbiddingRules,
+                reference: reference,
+                kind: RuleKind.Forbidden
+            );
         }
 
         private IEnumerable<ReferenceRule> GetExplicitlyAllowedRules(Reference reference)
         {
-            return GetMatchingRules(rules: _allowingRules, reference: reference, kind: RuleKind.Allowed);
+            return GetMatchingRules(
+                rules: _allowingRules,
+                reference: reference,
+                kind: RuleKind.Allowed
+            );
         }
 
         private IEnumerable<ReferenceRule> GetExplicitlyForbiddenRules(Reference reference)
         {
-            return GetMatchingRules(rules: _explicitlyForbiddenRules, reference: reference, kind: RuleKind.ExplicitlyForbidden);
+            return GetMatchingRules(
+                rules: _explicitlyForbiddenRules,
+                reference: reference,
+                kind: RuleKind.ExplicitlyForbidden
+            );
         }
 
-        private IEnumerable<ReferenceRule> GetMatchingRules(IReadOnlyList<ReferenceRule> rules, Reference reference, RuleKind kind)
+        private IEnumerable<ReferenceRule> GetMatchingRules(
+            IReadOnlyList<ReferenceRule> rules,
+            Reference reference,
+            RuleKind kind
+        )
         {
             foreach (var rule in rules)
             {
-                if (Regex.IsMatch(reference.From, _patternParser.GetRegex(rule.PatternFrom))
+                if (
+                    Regex.IsMatch(reference.From, _patternParser.GetRegex(rule.PatternFrom))
                     && Regex.IsMatch(reference.To, _patternParser.GetRegex(rule.PatternTo))
                     && DoesPrivateAssetsRuleMatch(reference, rule)
                     && DoesVersionRuleMatch(reference, rule)
-                    && rule.Kind == kind)
+                    && rule.Kind == kind
+                )
                 {
                     _usedRules.Add(rule);
                     yield return rule;
@@ -103,8 +134,7 @@ namespace ProjectReferencesRuler.Rules.References
             }
         }
 
-        private static bool DoesPrivateAssetsRuleMatch(Reference reference,
-            ReferenceRule rule)
+        private static bool DoesPrivateAssetsRuleMatch(Reference reference, ReferenceRule rule)
         {
             // if the value is not set, it is neutral -> true
             if (!rule.IsPrivateAssetsAllSet.HasValue)
@@ -115,8 +145,7 @@ namespace ProjectReferencesRuler.Rules.References
             return rule.IsPrivateAssetsAllSet.Value == reference.IsPrivateAssetsAllSet;
         }
 
-        private static bool DoesVersionRuleMatch(Reference reference,
-            ReferenceRule rule)
+        private static bool DoesVersionRuleMatch(Reference reference, ReferenceRule rule)
         {
             // if the value is not set, it is neutral -> true
             if (rule.Version == null)
