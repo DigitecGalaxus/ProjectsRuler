@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using static ProjectReferencesRuler.PathNormalizer;
 
 namespace ProjectReferencesRuler.SolutionParsing
 {
@@ -87,14 +88,6 @@ namespace ProjectReferencesRuler.SolutionParsing
 
             // removes the parenthesis
             return pathInParenthesis.Trim().Substring(1, pathInParenthesis.Length - 3);
-        }
-
-        /// <summary>
-        /// Replaces \ with / in order for this same code to work on both Windows and Linux.
-        /// </summary>
-        private static string CleanPath(string path)
-        {
-            return path.Replace("\\", "/");
         }
     }
 }
