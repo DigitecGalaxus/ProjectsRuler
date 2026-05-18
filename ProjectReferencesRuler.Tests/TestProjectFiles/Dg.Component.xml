@@ -12,5 +12,6 @@
     <PackageReference Include="Dg" Version="5.1.5" />
     <PackageReference Include="SimpleInjector" Version="4.0.12" />
     <PackageReference Include="Deblazer" Version="4.1.8" />
+    <PackageReference Remove="XUnit" />
   </ItemGroup>
 </Project>
