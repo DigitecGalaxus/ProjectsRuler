@@ -31,18 +31,21 @@ namespace ProjectReferencesRuler.ProjectParsing
                     from: from,
                     to: Path.GetFileNameWithoutExtension(CleanPath(tuple.Item1)),
                     isPrivateAssetsAllSet: tuple.Item2 == "All",
-                    versionOrNull: null));
+                    versionOrNull: null
+                ));
         }
 
         public IEnumerable<Reference> GetPackageReferences(string csprojPath)
         {
             var from = Path.GetFileNameWithoutExtension(csprojPath);
             return GetReferences(csprojPath, PackageReference)
+                .Where(tuple => !string.IsNullOrEmpty(tuple.Item1))
                 .Select(tuple => new Reference(
                     from: from,
                     to: tuple.Item1,
                     isPrivateAssetsAllSet: tuple.Item2 == "All",
-                    versionOrNull: tuple.Item3));
+                    versionOrNull: tuple.Item3
+                ));
         }
 
         public IEnumerable<string> GetProjectReferencePaths(string csprojPath)
@@ -71,7 +74,8 @@ namespace ProjectReferencesRuler.ProjectParsing
             return new Project(
                 name: CleanPath(Path.GetFileNameWithoutExtension(csprojPath)),
                 importedProps: GetImportedProps(doc).Select(CleanPath).ToList(),
-                targetFrameworks: GetTargetFrameworks(doc).ToList());
+                targetFrameworks: GetTargetFrameworks(doc).ToList()
+            );
         }
 
         /// <summary>
@@ -86,12 +90,18 @@ namespace ProjectReferencesRuler.ProjectParsing
         {
             foreach (var propertyGroup in doc.Root.ElementsIgnoreNamespace(PropertyGroup))
             {
-                foreach (var targetFrameworkElement in propertyGroup.ElementsIgnoreNamespace(TargetFramework))
+                foreach (
+                    var targetFrameworkElement in propertyGroup.ElementsIgnoreNamespace(
+                        TargetFramework
+                    )
+                )
                 {
                     yield return targetFrameworkElement.Value.Trim();
                 }
 
-                foreach (var targetFrameworks in propertyGroup.ElementsIgnoreNamespace(TargetFrameworks))
+                foreach (
+                    var targetFrameworks in propertyGroup.ElementsIgnoreNamespace(TargetFrameworks)
+                )
                 {
                     foreach (var targetFramework in targetFrameworks.Value.Split(','))
                     {
@@ -109,7 +119,10 @@ namespace ProjectReferencesRuler.ProjectParsing
             }
         }
 
-        private IEnumerable<(string, string, string)> GetReferences(string csprojPath, string referenceType)
+        private IEnumerable<(string, string, string)> GetReferences(
+            string csprojPath,
+            string referenceType
+        )
         {
             var doc = ParseXml(csprojPath);
 
@@ -117,12 +130,15 @@ namespace ProjectReferencesRuler.ProjectParsing
 
             return projectReferenceItemGroup
                 .ElementsIgnoreNamespace(referenceType)
-                .Select(xel => (GetIncludeContent(xel), GetPrivateAssetsContent(xel), GetVersionOrNull(xel)));
+                .Select(xel =>
+                    (GetIncludeContent(xel), GetPrivateAssetsContent(xel), GetVersionOrNull(xel))
+                );
         }
 
         private static IEnumerable<XElement> GetItemGroups(XDocument doc, string elementName)
         {
-            return doc.Root.ElementsIgnoreNamespace(ItemGroup)
+            return doc
+                .Root.ElementsIgnoreNamespace(ItemGroup)
                 .Where(ig => ig.ElementsIgnoreNamespace(elementName).Any());
         }
 
@@ -144,16 +160,20 @@ namespace ProjectReferencesRuler.ProjectParsing
 
     internal static class Extensions
     {
-        public static IEnumerable<XElement> ElementsIgnoreNamespace(this XElement element, string name)
+        public static IEnumerable<XElement> ElementsIgnoreNamespace(
+            this XElement element,
+            string name
+        )
         {
-            return element.Elements()
-                .Where(e => e.Name.LocalName == name);
+            return element.Elements().Where(e => e.Name.LocalName == name);
         }
 
-        public static IEnumerable<XElement> ElementsIgnoreNamespace(this IEnumerable<XElement> elements, string name)
+        public static IEnumerable<XElement> ElementsIgnoreNamespace(
+            this IEnumerable<XElement> elements,
+            string name
+        )
         {
-            return elements.Elements()
-                .Where(e => e.Name.LocalName == name);
+            return elements.Elements().Where(e => e.Name.LocalName == name);
         }
     }
 }
