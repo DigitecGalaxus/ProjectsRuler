@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using ProjectReferencesRuler.Rules.Project;
 using ProjectReferencesRuler.Rules.References;
+using static ProjectReferencesRuler.PathNormalizer;
 
 namespace ProjectReferencesRuler.ProjectParsing
 {
@@ -76,14 +77,6 @@ namespace ProjectReferencesRuler.ProjectParsing
                 importedProps: GetImportedProps(doc).Select(CleanPath).ToList(),
                 targetFrameworks: GetTargetFrameworks(doc).ToList()
             );
-        }
-
-        /// <summary>
-        /// Replaces \ with / in order for this same code to work on both Windows and Linux.
-        /// </summary>
-        private static string CleanPath(string path)
-        {
-            return path.Replace("\\", "/");
         }
 
         private IEnumerable<string> GetTargetFrameworks(XDocument doc)
